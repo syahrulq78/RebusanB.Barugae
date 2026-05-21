@@ -173,10 +173,10 @@
       <div class="card-value" id="cardStok">0</div>
       <div class="card-sub">box sisa konsinyasi</div>
     </div>
-    <div class="card blue">
-      <div class="card-label">Total Laku (Bulan Ini)</div>
-      <div class="card-value" id="cardLaku">0</div>
-      <div class="card-sub" id="cardLakuSub">box terjual</div>
+    <div class="card green">
+      <div class="card-label">Akumulasi Nilai Laku</div>
+      <div class="card-value" id="cardAkumulasi">Rp 0</div>
+      <div class="card-sub" id="cardAkumulasiSub">total laku × harga/box</div>
     </div>
     <div class="card green" id="cardPiutangWrap">
       <div class="card-label" id="cardPiutangLabel">Piutang ke Toko</div>
@@ -184,14 +184,18 @@
       <div class="card-sub" id="cardPiutangSub">toko masih harus bayar</div>
     </div>
     <div class="card blue">
-      <div class="card-label">Total Produksi (Bulan Ini)</div>
-      <div class="card-value" id="cardProduksi">0</div>
-      <div class="card-sub">box dititipkan</div>
+      <div class="card-label">Laku Bulan Ini</div>
+      <div class="card-value" id="cardLaku">0</div>
+      <div class="card-sub" id="cardLakuSub">box terjual</div>
     </div>
   </div>
 
+  <div class="alert alert-warning" id="alertHarga">
+    ⚠️ <strong>Harga per box belum diatur!</strong> Buka tab <strong>⚙️ Atur</strong> dan isi harga (mis: Rp 22.000) agar tagihan bisa dihitung dengan benar.
+  </div>
+
   <div class="alert alert-warning" id="alertUtang">
-    ⚠️ <strong>Kamu berutang rebusan ke toko!</strong> Toko sudah bayar di muka sebesar <span id="alertUtangJumlah"></span>. Segera kirim box rebusan sesuai saldo.
+    ⚠️ <strong>Kamu berutang rebusan ke toko!</strong> Toko sudah kelebihan bayar sebesar <span id="alertUtangJumlah"></span>. Segera kirim box rebusan sesuai selisihnya.
   </div>
 
   <!-- TABS -->
@@ -346,7 +350,8 @@
       <div class="form-grid">
         <div class="form-group">
           <label>Harga per Box (Rp)</label>
-          <input type="number" id="set_harga" min="0" placeholder="mis: 15000" inputmode="numeric">
+          <input type="number" id="set_harga" min="0" placeholder="mis: 22000" inputmode="numeric">
+          <small style="color:var(--danger);font-size:11px;margin-top:2px;">⚠️ Wajib diisi agar tagihan terhitung otomatis</small>
         </div>
         <div class="form-group">
           <label>Nama Toko</label>
@@ -435,22 +440,54 @@ function renderDashboard() {
   const c = calcAll();
   const s = getSettings();
   if (s.toko) document.getElementById('headerToko').textContent = s.toko;
+
+  // Card: Stok di toko
   document.getElementById('cardStok').textContent = c.stokToko;
+
+  // Card: Akumulasi Nilai Laku
+  document.getElementById('cardAkumulasi').textContent = c.harga > 0 ? fmtRp(c.totNilaiLaku) : '—';
+  document.getElementById('cardAkumulasiSub').textContent = c.harga > 0
+    ? `${c.totLaku} box × ${fmtRp(c.harga)}`
+    : '⚠️ atur harga per box dulu';
+
+  // Card: Laku bulan ini
   document.getElementById('cardLaku').textContent = c.lakuMK;
-  document.getElementById('cardLakuSub').textContent = `box terjual • ${monthLabel(currentMK())}`;
-  document.getElementById('cardProduksi').textContent = c.prodMK;
-  const piEl    = document.getElementById('cardPiutang');
-  const piLabel = document.getElementById('cardPiutangLabel');
-  const piSub   = document.getElementById('cardPiutangSub');
-  const wrap    = document.getElementById('cardPiutangWrap');
-  const alert   = document.getElementById('alertUtang');
-  if (c.saldo >= 0) {
-    piLabel.textContent = 'Piutang ke Toko'; piEl.textContent = fmtRp(c.saldo);
-    piSub.textContent = 'toko masih harus bayar'; wrap.className = 'card green'; alert.classList.remove('show');
+  document.getElementById('cardLakuSub').textContent = c.harga > 0
+    ? `= ${fmtRp(c.lakuMK * c.harga)} • ${monthLabel(currentMK())}`
+    : `box terjual • ${monthLabel(currentMK())}`;
+
+  // Card: Saldo Tagihan
+  const piEl       = document.getElementById('cardPiutang');
+  const piLabel    = document.getElementById('cardPiutangLabel');
+  const piSub      = document.getElementById('cardPiutangSub');
+  const wrap       = document.getElementById('cardPiutangWrap');
+  const alertUtang = document.getElementById('alertUtang');
+  const alertHarga = document.getElementById('alertHarga');
+
+  if (c.harga === 0) {
+    piLabel.textContent = 'Saldo Tagihan';
+    piEl.textContent    = '—';
+    piSub.textContent   = 'harga per box belum diatur';
+    wrap.className      = 'card orange';
+    alertUtang.classList.remove('show');
+    alertHarga.classList.add('show');
+  } else if (c.saldo >= 0) {
+    piLabel.textContent = 'Saldo Tagihan';
+    piEl.textContent    = fmtRp(c.saldo);
+    piSub.textContent   = `Tagihan: ${fmtRp(c.totNilaiLaku)} | Dibayar: ${fmtRp(c.totBayar)}`;
+    wrap.className      = 'card green';
+    alertUtang.classList.remove('show');
+    alertHarga.classList.remove('show');
   } else {
-    piLabel.textContent = 'Utang Rebusan'; piEl.textContent = fmtRp(c.saldo);
-    piSub.textContent = 'kamu harus kirim box lebih'; wrap.className = 'card red'; alert.classList.add('show');
-    document.getElementById('alertUtangJumlah').textContent = fmtRp(-c.saldo);
+    const utangBox = Math.ceil(Math.abs(c.saldo) / c.harga);
+    piLabel.textContent = 'Utang Rebusan';
+    piEl.textContent    = `${utangBox} box`;
+    piSub.textContent   = `Toko kelebihan bayar ${fmtRp(Math.abs(c.saldo))}`;
+    wrap.className      = 'card red';
+    alertUtang.classList.add('show');
+    document.getElementById('alertUtangJumlah').textContent =
+      `${utangBox} box (kelebihan ${fmtRp(Math.abs(c.saldo))})`;
+    alertHarga.classList.remove('show');
   }
 }
 
