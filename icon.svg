@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="90" fill="#e67e22"/>
+  <!-- Sticks -->
+  <line x1="168" y1="105" x2="168" y2="310" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+  <line x1="256" y1="85"  x2="256" y2="310" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+  <line x1="344" y1="105" x2="344" y2="310" stroke="#fff" stroke-width="22" stroke-linecap="round"/>
+  <!-- Food balls -->
+  <circle cx="168" cy="145" r="34" fill="#fff"/>
+  <circle cx="168" cy="225" r="28" fill="#fdebd0"/>
+  <circle cx="256" cy="122" r="34" fill="#fff"/>
+  <circle cx="256" cy="202" r="28" fill="#fdebd0"/>
+  <circle cx="344" cy="145" r="34" fill="#fff"/>
+  <circle cx="344" cy="225" r="28" fill="#fdebd0"/>
+  <!-- Bowl -->
+  <path d="M95 310 Q256 430 417 310 Z" fill="#d35400"/>
+  <path d="M95 310 Q256 390 417 310" stroke="#fff" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="256" y="478" font-size="72" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-weight="800" letter-spacing="2">REBUSAN</text>
+</svg>
