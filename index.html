@@ -197,6 +197,7 @@
   <div class="tabs">
     <button class="tab active" onclick="switchTab('entri')">📝 Entri</button>
     <button class="tab" onclick="switchTab('bayar')">💰 Bayar</button>
+    <button class="tab" onclick="switchTab('keluar')">💸 Keluar</button>
     <button class="tab" onclick="switchTab('riwayat')">📋 Riwayat</button>
     <button class="tab" onclick="switchTab('laporan')">📊 Laporan</button>
     <button class="tab" onclick="switchTab('pengaturan')">⚙️ Atur</button>
@@ -335,6 +336,47 @@
       <div class="summary-row"><span class="label">Total pembayaran bulan ini</span><span id="lapTotalBayar">Rp 0</span></div>
       <div class="summary-row"><span class="label">Saldo piutang awal bulan</span><span id="lapSaldoAwal">Rp 0</span></div>
       <div class="summary-row total"><span>Saldo tagihan bulan ini</span><span id="lapSaldoAkhir" style="color:var(--success)">Rp 0</span></div>
+      <div class="summary-row" style="margin-top:12px;padding-top:12px;border-top:2px solid var(--border);">
+        <span class="label">Total pengeluaran bulan ini</span>
+        <span id="lapTotalKeluar" style="color:var(--danger)">Rp 0</span>
+      </div>
+      <div class="summary-row total"><span>Estimasi Keuntungan</span><span id="lapKeuntungan" style="color:var(--success)">Rp 0</span></div>
+    </div>
+  </div>
+
+  <!-- PANEL: PENGELUARAN -->
+  <div class="panel" id="panel-keluar">
+    <div class="form-card">
+      <div class="edit-mode-banner" id="editKeluarBanner">✏️ Mode edit — ubah data lalu klik <strong>Update</strong></div>
+      <div class="form-title" id="formKeluarTitle">💸 Catat Pengeluaran</div>
+      <div class="form-grid">
+        <div class="form-group"><label>Tanggal</label><input type="date" id="keluar_tanggal"></div>
+        <div class="form-group"><label>Item Pengeluaran</label><select id="keluar_item" onchange="handleItemSelect()"></select></div>
+        <div class="form-group" id="keluar_baru_wrap" style="display:none"><label>Nama Item Baru</label><input type="text" id="keluar_baru" placeholder="ketik nama item..."></div>
+        <div class="form-group"><label>Jumlah / Qty</label><input type="number" id="keluar_qty" min="0" step="any" placeholder="mis: 2" inputmode="decimal"></div>
+        <div class="form-group"><label>Satuan</label><input type="text" id="keluar_satuan" placeholder="mis: kg, buah, pcs"></div>
+        <div class="form-group"><label>Harga Total (Rp)</label><input type="number" id="keluar_harga" min="0" placeholder="0" inputmode="numeric"></div>
+        <div class="form-group full"><label>Catatan (opsional)</label><input type="text" id="keluar_catatan" placeholder="opsional"></div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-primary" id="btnSimpanKeluar" onclick="simpanKeluar()">💾 Simpan</button>
+        <button class="btn btn-cancel" id="btnBatalKeluar" onclick="batalEditKeluar()" style="display:none">✕ Batal</button>
+        <span id="keluar_msg" style="font-size:13px;color:var(--success);display:none">✓ Tersimpan!</span>
+      </div>
+    </div>
+    <div class="section-header">
+      <div class="section-title">Riwayat Pengeluaran</div>
+      <div class="month-filter"><select id="filterBulanKeluar" onchange="renderKeluarTable()"></select></div>
+    </div>
+    <div class="cards" style="margin-bottom:12px;">
+      <div class="card red"><div class="card-label">Total Pengeluaran</div><div class="card-value" id="totalKeluarBulan">Rp 0</div><div class="card-sub">bulan ini</div></div>
+      <div class="card green"><div class="card-label">Estimasi Keuntungan</div><div class="card-value" id="estimasiUntung">Rp 0</div><div class="card-sub">nilai laku − pengeluaran</div></div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tanggal</th><th>Item</th><th>Qty</th><th>Harga</th><th>Catatan</th><th></th></tr></thead>
+        <tbody id="tbodyKeluar"><tr><td colspan="6" class="empty-state"><div class="icon">💸</div>Belum ada pengeluaran</td></tr></tbody>
+      </table>
     </div>
   </div>
 
@@ -395,6 +437,7 @@ function allMonths()  {
   const s = new Set();
   getEntri().forEach(e => s.add(monthKey(e.tanggal)));
   getBayar().forEach(e => s.add(monthKey(e.tanggal)));
+  getPengeluaran().forEach(e => s.add(monthKey(e.tanggal)));
   s.delete('');
   return [...s].sort().reverse();
 }
@@ -405,7 +448,7 @@ function allMonths()  {
 function populateMonthSelects() {
   const months = allMonths();
   if (!months.includes(currentMK())) months.unshift(currentMK());
-  ['filterBulanEntri','filterBulanBayar','filterBulanRiwayat','filterBulanLaporan'].forEach(id => {
+  ['filterBulanEntri','filterBulanBayar','filterBulanRiwayat','filterBulanLaporan','filterBulanKeluar'].forEach(id => {
     const el = document.getElementById(id);
     const cur = el.value || currentMK();
     el.innerHTML = months.map(m => `<option value="${m}" ${m===cur?'selected':''}>${monthLabel(m)}</option>`).join('');
@@ -685,9 +728,15 @@ function renderLaporan() {
   document.getElementById('lapLakuSub').textContent = harga>0?fmtRp(nilaiLakuMK):'box terjual';
   document.getElementById('lapRetur').textContent = retur;
   document.getElementById('lapBayar').textContent = fmtRp(totBayarMK);
-  document.getElementById('lapNilaiLaku').textContent  = harga>0?fmtRp(nilaiLakuMK):`${laku} box × harga belum diset`;
-  document.getElementById('lapTotalBayar').textContent = fmtRp(totBayarMK);
-  document.getElementById('lapSaldoAwal').textContent  = fmtRp(saldoAwal)+(saldoAwal<0?' (utang)':'');
+  const totalKeluarMK = getPengeluaran().filter(e=>monthKey(e.tanggal)===mk).reduce((a,e)=>a+(e.harga||0),0);
+  const keuntunganMK  = nilaiLakuMK - totalKeluarMK;
+  document.getElementById('lapNilaiLaku').textContent   = harga>0?fmtRp(nilaiLakuMK):`${laku} box × harga belum diset`;
+  document.getElementById('lapTotalBayar').textContent  = fmtRp(totBayarMK);
+  document.getElementById('lapSaldoAwal').textContent   = fmtRp(saldoAwal)+(saldoAwal<0?' (utang)':'');
+  document.getElementById('lapTotalKeluar').textContent = fmtRp(totalKeluarMK);
+  const untEl = document.getElementById('lapKeuntungan');
+  untEl.textContent = fmtRp(keuntunganMK)+(keuntunganMK<0?' (rugi)':' (untung)');
+  untEl.style.color = keuntunganMK>=0?'var(--success)':'var(--danger)';
   const sEl = document.getElementById('lapSaldoAkhir');
   sEl.textContent = fmtRp(saldoAkhir)+(saldoAkhir<0?' (kamu utang rebusan)':' (toko masih hutang)');
   sEl.style.color = saldoAkhir>=0?'var(--success)':'var(--danger)';
@@ -810,22 +859,134 @@ function cetakPDF() {
   w.document.write(html); w.document.close();
 }
 
+// =========================================================
+// PENGELUARAN
+// =========================================================
+const DEFAULT_ITEMS = [
+  'Ubi ungu','Ubi kuning','Ubi putih','Kacang edamame','Pisang','Telur','Jagung',
+  'Thinwall rebusan','Thinwall sambal','Lombok keriting','Tomat','Cabe',
+  'Bawang merah','Bawang putih','Gula merah','Bumbu kaldu','Garam','Minyak goreng','Gas'
+];
+function getPengeluaran() { return load('rb_keluar'); }
+function getCustomItems()  { return loadObj('rb_items', []); }
+function getAllItems()      { const c=getCustomItems(); return [...DEFAULT_ITEMS,...c.filter(x=>!DEFAULT_ITEMS.includes(x))]; }
+function populateItemSelect() {
+  const items=getAllItems(), sel=document.getElementById('keluar_item'), cur=sel.value;
+  sel.innerHTML='<option value="">-- Pilih Item --</option>'+
+    items.map(i=>`<option value="${i}" ${i===cur?'selected':''}>${i}</option>`).join('')+
+    '<option value="__baru__">➕ Tambah item baru...</option>';
+}
+function handleItemSelect() {
+  const val=document.getElementById('keluar_item').value;
+  document.getElementById('keluar_baru_wrap').style.display=val==='__baru__'?'flex':'none';
+  if(val==='__baru__') document.getElementById('keluar_baru').focus();
+}
+let editingKeluarId=null;
+function simpanKeluar() {
+  const tgl=document.getElementById('keluar_tanggal').value;
+  let item=document.getElementById('keluar_item').value;
+  const baru=document.getElementById('keluar_baru').value.trim();
+  const qty=document.getElementById('keluar_qty').value.trim();
+  const satuan=document.getElementById('keluar_satuan').value.trim();
+  const harga=parseFloat(document.getElementById('keluar_harga').value)||0;
+  const catatan=document.getElementById('keluar_catatan').value.trim();
+  if(!tgl){alert('Tanggal wajib diisi!');return;}
+  if(item==='__baru__'){
+    if(!baru){alert('Nama item baru wajib diisi!');return;}
+    item=baru;
+    const custom=getCustomItems();
+    if(!custom.includes(baru)&&!DEFAULT_ITEMS.includes(baru)){custom.push(baru);save('rb_items',custom);}
+  }
+  if(!item){alert('Item pengeluaran wajib dipilih!');return;}
+  if(harga<=0){alert('Harga wajib diisi!');return;}
+  const data=getPengeluaran();
+  if(editingKeluarId!==null){
+    const idx=data.findIndex(e=>e.id===editingKeluarId);
+    if(idx!==-1) data[idx]={id:editingKeluarId,tanggal:tgl,item,qty,satuan,harga,catatan};
+    batalEditKeluar();
+  } else { data.push({id:Date.now(),tanggal:tgl,item,qty,satuan,harga,catatan}); }
+  data.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
+  save('rb_keluar',data);
+  ['keluar_qty','keluar_satuan','keluar_harga','keluar_catatan','keluar_baru'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('keluar_baru_wrap').style.display='none';
+  populateItemSelect();
+  showMsg('keluar_msg'); populateMonthSelects(); renderKeluarTable(); renderDashboard();
+}
+function editKeluar(id) {
+  const e=getPengeluaran().find(e=>e.id===id); if(!e) return;
+  editingKeluarId=id;
+  document.getElementById('keluar_tanggal').value=e.tanggal;
+  document.getElementById('keluar_qty').value=e.qty||'';
+  document.getElementById('keluar_satuan').value=e.satuan||'';
+  document.getElementById('keluar_harga').value=e.harga||'';
+  document.getElementById('keluar_catatan').value=e.catatan||'';
+  populateItemSelect(); document.getElementById('keluar_item').value=e.item;
+  document.getElementById('keluar_baru_wrap').style.display='none';
+  document.getElementById('formKeluarTitle').textContent='✏️ Edit Pengeluaran';
+  document.getElementById('btnSimpanKeluar').textContent='💾 Update';
+  document.getElementById('btnBatalKeluar').style.display='inline-block';
+  document.getElementById('editKeluarBanner').style.display='block';
+  document.querySelector('#panel-keluar .form-card').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function batalEditKeluar() {
+  editingKeluarId=null;
+  document.getElementById('keluar_tanggal').value=todayStr();
+  ['keluar_qty','keluar_satuan','keluar_harga','keluar_catatan','keluar_baru'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('keluar_baru_wrap').style.display='none';
+  document.getElementById('formKeluarTitle').textContent='💸 Catat Pengeluaran';
+  document.getElementById('btnSimpanKeluar').textContent='💾 Simpan';
+  document.getElementById('btnBatalKeluar').style.display='none';
+  document.getElementById('editKeluarBanner').style.display='none';
+  populateItemSelect();
+}
+function hapusKeluar(id) {
+  if(!confirm('Hapus pengeluaran ini?')) return;
+  save('rb_keluar',getPengeluaran().filter(e=>e.id!==id));
+  populateMonthSelects(); renderKeluarTable(); renderDashboard();
+}
+function renderKeluarTable() {
+  const mk=document.getElementById('filterBulanKeluar').value||currentMK();
+  const data=getPengeluaran().filter(e=>monthKey(e.tanggal)===mk);
+  const totalKeluar=data.reduce((a,e)=>a+(e.harga||0),0);
+  const harga=parseFloat(getSettings().harga)||0;
+  const lakuMK=getEntri().filter(e=>monthKey(e.tanggal)===mk).reduce((a,e)=>a+(e.laku||0),0);
+  const keuntungan=lakuMK*harga-totalKeluar;
+  document.getElementById('totalKeluarBulan').textContent=fmtRp(totalKeluar);
+  const el=document.getElementById('estimasiUntung');
+  el.textContent=fmtRp(keuntungan); el.style.color=keuntungan>=0?'var(--success)':'var(--danger)';
+  const tbody=document.getElementById('tbodyKeluar');
+  if(!data.length){tbody.innerHTML='<tr><td colspan="6" class="empty-state"><div class="icon">💸</div>Belum ada pengeluaran bulan ini</td></tr>';return;}
+  tbody.innerHTML=data.map(e=>`
+    <tr>
+      <td>${fmtTgl(e.tanggal)}</td><td><strong>${e.item}</strong></td>
+      <td style="color:var(--muted);font-size:12px">${e.qty?e.qty+' '+(e.satuan||''):'-'}</td>
+      <td><strong style="color:var(--danger)">${fmtRp(e.harga)}</strong></td>
+      <td style="color:var(--muted);font-size:12px">${e.catatan||'-'}</td>
+      <td style="white-space:nowrap">
+        <button class="btn btn-edit" onclick="editKeluar(${e.id})">✏️</button>
+        <button class="btn btn-danger" onclick="hapusKeluar(${e.id})">✕</button>
+      </td>
+    </tr>`).join('');
+}
+
 function hapusSemua() {
   if (!confirm('Yakin hapus SEMUA data? Tidak bisa dibatalkan!')) return;
   if (!confirm('Konfirmasi sekali lagi: hapus semua data?')) return;
-  localStorage.removeItem(KEYS.entri); localStorage.removeItem(KEYS.bayar); init();
+  localStorage.removeItem(KEYS.entri); localStorage.removeItem(KEYS.bayar);
+  localStorage.removeItem('rb_keluar'); init();
 }
 
 // =========================================================
 // TABS
 // =========================================================
 function switchTab(name) {
-  const names = ['entri','bayar','riwayat','laporan','pengaturan'];
+  const names = ['entri','bayar','keluar','riwayat','laporan','pengaturan'];
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', names[i]===name));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
   if (name==='riwayat') renderRiwayat();
   if (name==='laporan') renderLaporan();
+  if (name==='keluar')  { populateItemSelect(); renderKeluarTable(); }
 }
 
 function showMsg(id) { const el=document.getElementById(id); el.style.display='inline'; setTimeout(()=>el.style.display='none',2500); }
@@ -865,9 +1026,11 @@ if ('serviceWorker' in navigator) {
 // INIT
 // =========================================================
 function init() {
-  document.getElementById('entri_tanggal').value = todayStr();
-  document.getElementById('bayar_tanggal').value = todayStr();
-  loadSettings(); populateMonthSelects(); renderDashboard(); renderEntriTable(); renderBayarTable();
+  document.getElementById('entri_tanggal').value  = todayStr();
+  document.getElementById('bayar_tanggal').value  = todayStr();
+  document.getElementById('keluar_tanggal').value = todayStr();
+  loadSettings(); populateMonthSelects(); populateItemSelect();
+  renderDashboard(); renderEntriTable(); renderBayarTable();
 }
 init();
 </script>
