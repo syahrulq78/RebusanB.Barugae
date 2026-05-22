@@ -168,11 +168,6 @@
 <main>
   <!-- SUMMARY CARDS -->
   <div class="cards">
-    <div class="card orange">
-      <div class="card-label">Stok di Toko</div>
-      <div class="card-value" id="cardStok">0</div>
-      <div class="card-sub">box sisa konsinyasi</div>
-    </div>
     <div class="card green">
       <div class="card-label">Akumulasi Nilai Laku</div>
       <div class="card-value" id="cardAkumulasi">Rp 0</div>
@@ -307,7 +302,10 @@
   <div class="panel" id="panel-laporan">
     <div class="section-header">
       <div class="section-title">Laporan Bulanan</div>
-      <div class="month-filter"><select id="filterBulanLaporan" onchange="renderLaporan()"></select></div>
+      <div class="month-filter" style="display:flex;gap:8px;align-items:center;">
+        <select id="filterBulanLaporan" onchange="renderLaporan()"></select>
+        <button class="btn btn-primary" onclick="cetakPDF()" style="white-space:nowrap;padding:7px 14px;font-size:13px;">🖨️ Cetak / PDF</button>
+      </div>
     </div>
     <div class="cards" style="margin-bottom:16px;">
       <div class="card orange">
@@ -336,10 +334,7 @@
       <div class="summary-row"><span class="label">Nilai laku bulan ini</span><span id="lapNilaiLaku">Rp 0</span></div>
       <div class="summary-row"><span class="label">Total pembayaran bulan ini</span><span id="lapTotalBayar">Rp 0</span></div>
       <div class="summary-row"><span class="label">Saldo piutang awal bulan</span><span id="lapSaldoAwal">Rp 0</span></div>
-      <div class="summary-row total"><span>Saldo akhir bulan</span><span id="lapSaldoAkhir" style="color:var(--success)">Rp 0</span></div>
-      <div class="summary-row" style="margin-top:12px;padding-top:12px;border-top:2px solid var(--border);">
-        <span class="label">Stok di toko (keseluruhan)</span><span id="lapStokToko">0 box</span>
-      </div>
+      <div class="summary-row total"><span>Saldo tagihan bulan ini</span><span id="lapSaldoAkhir" style="color:var(--success)">Rp 0</span></div>
     </div>
   </div>
 
@@ -356,6 +351,10 @@
         <div class="form-group">
           <label>Nama Toko</label>
           <input type="text" id="set_toko" placeholder="mis: Toko Kue Bu Sari">
+        </div>
+        <div class="form-group">
+          <label>Nama Pemilik / Usaha</label>
+          <input type="text" id="set_nama" placeholder="mis: Dapur Rebusan Bu Rina">
         </div>
       </div>
       <div class="form-actions">
@@ -702,14 +701,119 @@ function renderLaporan() {
 // SETTINGS
 // =========================================================
 function simpanSettings() {
-  save(KEYS.settings, { harga: parseFloat(document.getElementById('set_harga').value)||0, toko: document.getElementById('set_toko').value.trim() });
+  save(KEYS.settings, {
+    harga: parseFloat(document.getElementById('set_harga').value)||0,
+    toko:  document.getElementById('set_toko').value.trim(),
+    nama:  document.getElementById('set_nama').value.trim()
+  });
   showMsg('set_msg'); renderDashboard(); renderEntriTable();
 }
 function loadSettings() {
   const s = getSettings();
   document.getElementById('set_harga').value = s.harga||'';
   document.getElementById('set_toko').value  = s.toko||'';
+  document.getElementById('set_nama').value  = s.nama||'';
 }
+
+// =========================================================
+// CETAK / SIMPAN PDF
+// =========================================================
+function cetakPDF() {
+  const mk    = document.getElementById('filterBulanLaporan').value || currentMK();
+  const s     = getSettings();
+  const harga = parseFloat(s.harga) || 0;
+  const entri = getEntri().filter(e => monthKey(e.tanggal) === mk).sort((a,b) => a.tanggal.localeCompare(b.tanggal));
+  const bayar = getBayar().filter(b => monthKey(b.tanggal) === mk).sort((a,b) => a.tanggal.localeCompare(b.tanggal));
+  const totLaku  = entri.reduce((a,e)=>a+(e.laku||0),0);
+  const totRetur = entri.reduce((a,e)=>a+(e.retur||0),0);
+  const totNilai = totLaku * harga;
+  const totBayar = bayar.reduce((a,b)=>a+(b.jumlah||0),0);
+  const allEntri = getEntri(), allBayar = getBayar();
+  const prevLaku  = allEntri.filter(e=>monthKey(e.tanggal)<mk).reduce((a,e)=>a+(e.laku||0),0);
+  const prevBayar = allBayar.filter(b=>monthKey(b.tanggal)<mk).reduce((a,b)=>a+(b.jumlah||0),0);
+  const saldoAwal  = prevLaku * harga - prevBayar;
+  const saldoAkhir = saldoAwal + totNilai - totBayar;
+  const rowsEntri = entri.length ? entri.map((e,i) => `
+    <tr class="${i%2===1?'alt':''}">
+      <td>${fmtTgl(e.tanggal)}</td><td class="num">${e.titip}</td><td class="num">${e.laku}</td>
+      <td class="num">${e.retur}</td>
+      <td class="num">${harga>0?'Rp '+(e.laku*harga).toLocaleString('id-ID'):'-'}</td>
+      <td>${e.catatan||''}</td>
+    </tr>`).join('') : '<tr><td colspan="6" style="text-align:center;color:#999;padding:16px;">Tidak ada data entri</td></tr>';
+  const rowsBayar = bayar.length ? bayar.map((b,i) => `
+    <tr class="${i%2===1?'alt':''}">
+      <td>${fmtTgl(b.tanggal)}</td>
+      <td class="num rp">Rp ${b.jumlah.toLocaleString('id-ID')}</td>
+      <td>${b.catatan||''}</td>
+    </tr>`).join('') : '<tr><td colspan="3" style="text-align:center;color:#999;padding:16px;">Tidak ada pembayaran</td></tr>';
+  const saldoWarna = saldoAkhir >= 0 ? '#1a7a44' : '#c0392b';
+  const saldoTeks  = saldoAkhir >= 0
+    ? `Rp ${saldoAkhir.toLocaleString('id-ID')} <small>(toko masih harus bayar)</small>`
+    : `Rp ${Math.abs(saldoAkhir).toLocaleString('id-ID')} <small>(sudah lunas / lebih bayar)</small>`;
+  const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8">
+<title>Tagihan Rebusan – ${monthLabel(mk)}</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;font-size:13px;color:#222;padding:32px}
+  .kop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;border-bottom:3px solid #e67e22;padding-bottom:14px}
+  .kop-left h1{font-size:22px;color:#e67e22;font-weight:800;letter-spacing:1px}.kop-left p{font-size:12px;color:#666;margin-top:3px}
+  .kop-right{text-align:right;font-size:12px;color:#555;line-height:1.7}.kop-right strong{font-size:15px;color:#222}
+  h2{font-size:13px;font-weight:700;color:#e67e22;margin:20px 0 8px;text-transform:uppercase;letter-spacing:.5px}
+  table{width:100%;border-collapse:collapse;margin-bottom:8px}
+  th{background:#e67e22;color:white;padding:7px 10px;text-align:left;font-size:12px}
+  td{padding:7px 10px;border-bottom:1px solid #eee;vertical-align:middle}tr.alt td{background:#fff8f2}
+  .num{text-align:right}.rp{color:#1a7a44;font-weight:600}
+  .rekap{margin-top:20px;border:1.5px solid #e0d6cc;border-radius:8px;overflow:hidden}
+  .rekap-row{display:flex;justify-content:space-between;padding:9px 16px;border-bottom:1px solid #eee;font-size:13px}
+  .rekap-row:last-child{border:none}.rekap-row.total{background:#fdebd0;font-weight:700;font-size:14px}
+  .rekap-row .lbl{color:#777}
+  .ttd{margin-top:40px;display:flex;justify-content:space-between}
+  .ttd-col{text-align:center}.ttd-col .garis{margin-top:50px;border-top:1px solid #333;padding-top:4px;font-size:12px}
+  .footer{margin-top:30px;text-align:center;font-size:11px;color:#aaa;border-top:1px solid #eee;padding-top:10px}
+  @media print{body{padding:20px}}
+</style></head><body>
+<div class="kop">
+  <div class="kop-left"><h1>🍢 TAGIHAN REBUSAN</h1><p>${s.nama||'Usaha Rebusan'}</p></div>
+  <div class="kop-right">
+    <div>Kepada: <strong>${s.toko||'Toko'}</strong></div>
+    <div>Periode: <strong>${monthLabel(mk)}</strong></div>
+    <div>Dicetak: ${new Date().toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'})}</div>
+  </div>
+</div>
+<h2>📦 Riwayat Entri Harian</h2>
+<table>
+  <thead><tr><th>Tanggal</th><th style="text-align:right">Titip</th><th style="text-align:right">Laku</th><th style="text-align:right">Retur</th><th style="text-align:right">Nilai Laku</th><th>Catatan</th></tr></thead>
+  <tbody>${rowsEntri}</tbody>
+  <tfoot><tr style="background:#f5f5f5;font-weight:700;">
+    <td>TOTAL</td><td class="num">${entri.reduce((a,e)=>a+(e.titip||0),0)}</td>
+    <td class="num">${totLaku}</td><td class="num">${totRetur}</td>
+    <td class="num">${harga>0?'Rp '+totNilai.toLocaleString('id-ID'):'-'}</td><td></td>
+  </tr></tfoot>
+</table>
+<h2>💳 Riwayat Pembayaran</h2>
+<table>
+  <thead><tr><th>Tanggal</th><th style="text-align:right">Jumlah Bayar</th><th>Catatan</th></tr></thead>
+  <tbody>${rowsBayar}</tbody>
+  <tfoot><tr style="background:#f5f5f5;font-weight:700;">
+    <td>TOTAL</td><td class="num rp">Rp ${totBayar.toLocaleString('id-ID')}</td><td></td>
+  </tr></tfoot>
+</table>
+<div class="rekap">
+  <div class="rekap-row"><span class="lbl">Saldo tagihan awal bulan</span><span>Rp ${Math.abs(saldoAwal).toLocaleString('id-ID')}${saldoAwal<0?' (lebih bayar sebelumnya)':''}</span></div>
+  <div class="rekap-row"><span class="lbl">Nilai laku bulan ini (${totLaku} box × Rp ${harga.toLocaleString('id-ID')})</span><span>Rp ${totNilai.toLocaleString('id-ID')}</span></div>
+  <div class="rekap-row"><span class="lbl">Total pembayaran bulan ini</span><span style="color:#1a7a44">Rp ${totBayar.toLocaleString('id-ID')}</span></div>
+  <div class="rekap-row total"><span>Saldo Tagihan Akhir Bulan</span><span style="color:${saldoWarna}">${saldoTeks}</span></div>
+</div>
+<div class="ttd">
+  <div class="ttd-col"><div class="garis">${s.nama||'Pemilik Rebusan'}</div></div>
+  <div class="ttd-col"><div class="garis">${s.toko||'Pihak Toko'}</div></div>
+</div>
+<div class="footer">Dokumen ini dicetak otomatis oleh Aplikasi Catatan Rebusan</div>
+<script>window.onload=function(){window.print()}<\/script>
+</body></html>`;
+  const w = window.open('','_blank','width=900,height=700');
+  w.document.write(html); w.document.close();
+}
+
 function hapusSemua() {
   if (!confirm('Yakin hapus SEMUA data? Tidak bisa dibatalkan!')) return;
   if (!confirm('Konfirmasi sekali lagi: hapus semua data?')) return;
