@@ -440,9 +440,6 @@ function renderDashboard() {
   const s = getSettings();
   if (s.toko) document.getElementById('headerToko').textContent = s.toko;
 
-  // Card: Stok di toko
-  document.getElementById('cardStok').textContent = c.stokToko;
-
   // Card: Akumulasi Nilai Laku
   document.getElementById('cardAkumulasi').textContent = c.harga > 0 ? fmtRp(c.totNilaiLaku) : '—';
   document.getElementById('cardAkumulasiSub').textContent = c.harga > 0
@@ -694,7 +691,6 @@ function renderLaporan() {
   const sEl = document.getElementById('lapSaldoAkhir');
   sEl.textContent = fmtRp(saldoAkhir)+(saldoAkhir<0?' (kamu utang rebusan)':' (toko masih hutang)');
   sEl.style.color = saldoAkhir>=0?'var(--success)':'var(--danger)';
-  document.getElementById('lapStokToko').textContent = `${allTitip-allLaku-allRetur} box`;
 }
 
 // =========================================================
