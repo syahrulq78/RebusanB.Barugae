@@ -163,6 +163,7 @@
     </div>
   </div>
   <button id="installBtn" onclick="installApp()">⬇ Install App</button>
+  <span id="syncStatus" onclick="pullFromSupabase()" title="Klik untuk sinkron ulang" style="font-size:20px;cursor:pointer;margin-left:6px;">☁️</span>
 </header>
 
 <main>
@@ -414,6 +415,69 @@
 
 <script>
 // =========================================================
+// SUPABASE CLOUD SYNC
+// =========================================================
+const SB_URL = 'https://kxuwompyqfwbtffapfty.supabase.co';
+const SB_KEY = 'sb_publishable_LEtWnvv2YeSPFbLG9bieOA_yZoVqvoc';
+
+function setSyncStatus(st) {
+  const el = document.getElementById('syncStatus');
+  if (!el) return;
+  const icons = { syncing:'🔄', ok:'☁️✓', offline:'📵', error:'⚠️' };
+  const tips  = { syncing:'Menyinkronkan ke cloud...', ok:'Tersinkron — klik untuk refresh', offline:'Offline — data aman di lokal', error:'Gagal sinkron — klik untuk coba lagi' };
+  el.textContent = icons[st] || '☁️';
+  el.title = tips[st] || '';
+}
+function sbH() {
+  return { 'apikey':SB_KEY, 'Authorization':'Bearer '+SB_KEY, 'Content-Type':'application/json', 'Prefer':'resolution=merge-duplicates' };
+}
+async function sbUpsert(tbl, rec) {
+  if (!navigator.onLine || !rec) return;
+  try { setSyncStatus('syncing'); const r=await fetch(`${SB_URL}/rest/v1/${tbl}`,{method:'POST',headers:sbH(),body:JSON.stringify(rec)}); setSyncStatus(r.ok?'ok':'error'); } catch { setSyncStatus('error'); }
+}
+async function sbDelete(tbl, id) {
+  if (!navigator.onLine) return;
+  try { setSyncStatus('syncing'); const r=await fetch(`${SB_URL}/rest/v1/${tbl}?id=eq.${id}`,{method:'DELETE',headers:sbH()}); setSyncStatus(r.ok?'ok':'error'); } catch { setSyncStatus('error'); }
+}
+async function sbGet(tbl) {
+  try { const r=await fetch(`${SB_URL}/rest/v1/${tbl}?select=*`,{headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}}); return r.ok?r.json():null; } catch { return null; }
+}
+async function sbSaveSettings() {
+  if (!navigator.onLine) return;
+  const s = getSettings();
+  sbUpsert('app_settings', { id:1, harga:s.harga, toko:s.toko, nama:s.nama, custom_items:getCustomItems() });
+}
+async function pullFromSupabase() {
+  if (!navigator.onLine) { setSyncStatus('offline'); return; }
+  setSyncStatus('syncing');
+  try {
+    const [remE,remB,remK,remS] = await Promise.all([sbGet('entri'),sbGet('bayar'),sbGet('pengeluaran'),sbGet('app_settings')]);
+    function merge(remote, local) {
+      if (!remote) return local;
+      const m = [...remote];
+      local.forEach(l => { if (!m.find(r=>r.id===l.id)) m.push(l); });
+      return m.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
+    }
+    const locE=getEntri(), locB=getBayar(), locK=getPengeluaran();
+    // Upload data lokal yang belum ada di cloud
+    if (remE) locE.forEach(r=>{ if(!remE.find(x=>x.id===r.id)) sbUpsert('entri',r); }); else locE.forEach(r=>sbUpsert('entri',r));
+    if (remB) locB.forEach(r=>{ if(!remB.find(x=>x.id===r.id)) sbUpsert('bayar',r); }); else locB.forEach(r=>sbUpsert('bayar',r));
+    if (remK) locK.forEach(r=>{ if(!remK.find(x=>x.id===r.id)) sbUpsert('pengeluaran',r); }); else locK.forEach(r=>sbUpsert('pengeluaran',r));
+    save(KEYS.entri, merge(remE,locE));
+    save(KEYS.bayar, merge(remB,locB));
+    save('rb_keluar', merge(remK,locK));
+    if (remS && remS.length) {
+      const s=remS[0], loc=getSettings();
+      save(KEYS.settings, {harga:s.harga||loc.harga, toko:s.toko||loc.toko, nama:s.nama||loc.nama});
+      if (s.custom_items && s.custom_items.length) save('rb_items', s.custom_items);
+    }
+    loadSettings(); populateMonthSelects(); populateItemSelect();
+    renderDashboard(); renderEntriTable(); renderBayarTable(); renderKeluarTable();
+    setSyncStatus('ok');
+  } catch(e) { console.error('Supabase error:',e); setSyncStatus('error'); }
+}
+
+// =========================================================
 // DATA & STORAGE
 // =========================================================
 const KEYS = { entri: 'rb_entri', bayar: 'rb_bayar', settings: 'rb_settings' };
@@ -586,12 +650,14 @@ function simpanEntri() {
   }
   data.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
   save(KEYS.entri, data);
+  { const _r=data.find(e=>e.tanggal===tgl&&e.titip===titip&&e.laku===laku&&e.retur===retur); if(_r) sbUpsert('entri',_r); }
   ['entri_titip','entri_laku','entri_retur','entri_catatan'].forEach(id => document.getElementById(id).value = '');
   showMsg('entri_msg'); populateMonthSelects(); renderEntriTable(); renderRiwayat(); renderDashboard();
 }
 function hapusEntri(id) {
   if (!confirm('Hapus entri ini?')) return;
   save(KEYS.entri, getEntri().filter(e=>e.id!==id));
+  sbDelete('entri', id);
   populateMonthSelects(); renderEntriTable(); renderRiwayat(); renderDashboard();
 }
 function renderEntriTable() {
@@ -662,12 +728,14 @@ function simpanBayar() {
   }
   data.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
   save(KEYS.bayar, data);
+  { const _r=data.find(b=>b.tanggal===tgl&&b.jumlah===jumlah); if(_r) sbUpsert('bayar',_r); }
   ['bayar_jumlah','bayar_catatan'].forEach(id=>document.getElementById(id).value='');
   showMsg('bayar_msg'); populateMonthSelects(); renderBayarTable(); renderRiwayat(); renderDashboard();
 }
 function hapusBayar(id) {
   if (!confirm('Hapus pembayaran ini?')) return;
   save(KEYS.bayar, getBayar().filter(b=>b.id!==id));
+  sbDelete('bayar', id);
   populateMonthSelects(); renderBayarTable(); renderRiwayat(); renderDashboard();
 }
 function renderBayarTable() {
@@ -751,6 +819,7 @@ function simpanSettings() {
     toko:  document.getElementById('set_toko').value.trim(),
     nama:  document.getElementById('set_nama').value.trim()
   });
+  sbSaveSettings();
   showMsg('set_msg'); renderDashboard(); renderEntriTable();
 }
 function loadSettings() {
@@ -907,6 +976,7 @@ function simpanKeluar() {
   } else { data.push({id:Date.now(),tanggal:tgl,item,qty,satuan,harga,catatan}); }
   data.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
   save('rb_keluar',data);
+  { const _r=data.find(e=>e.tanggal===tgl&&e.item===item&&e.harga===harga); if(_r) sbUpsert('pengeluaran',_r); }
   ['keluar_qty','keluar_satuan','keluar_harga','keluar_catatan','keluar_baru'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('keluar_baru_wrap').style.display='none';
   populateItemSelect();
@@ -942,6 +1012,7 @@ function batalEditKeluar() {
 function hapusKeluar(id) {
   if(!confirm('Hapus pengeluaran ini?')) return;
   save('rb_keluar',getPengeluaran().filter(e=>e.id!==id));
+  sbDelete('pengeluaran', id);
   populateMonthSelects(); renderKeluarTable(); renderDashboard();
 }
 function renderKeluarTable() {
@@ -1031,6 +1102,7 @@ function init() {
   document.getElementById('keluar_tanggal').value = todayStr();
   loadSettings(); populateMonthSelects(); populateItemSelect();
   renderDashboard(); renderEntriTable(); renderBayarTable();
+  pullFromSupabase();
 }
 init();
 </script>
