@@ -1,5 +1,11 @@
-const CACHE = 'rebusan-v1';
-const FILES = ['./index.html', './manifest.json', './icon.svg'];
+const CACHE = 'rebusan-v3';
+const FILES = [
+  './index.html',
+  './manifest.json',
+  './icon.svg',
+  './launchericon-192x192.png',
+  './launchericon-512x512.png'
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
