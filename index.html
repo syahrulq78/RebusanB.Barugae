@@ -170,7 +170,7 @@
   <!-- SUMMARY CARDS -->
   <div class="cards">
     <div class="card green">
-      <div class="card-label">Akumulasi Nilai Laku</div>
+      <div class="card-label">Nilai Laku Bulan Ini</div>
       <div class="card-value" id="cardAkumulasi">Rp 0</div>
       <div class="card-sub" id="cardAkumulasiSub">total laku × harga/box</div>
     </div>
@@ -342,6 +342,22 @@
         <span id="lapTotalKeluar" style="color:var(--danger)">Rp 0</span>
       </div>
       <div class="summary-row total"><span>Estimasi Keuntungan</span><span id="lapKeuntungan" style="color:var(--success)">Rp 0</span></div>
+    </div>
+
+    <div class="summary-table" style="margin-top:16px;">
+      <div class="section-title" style="margin-bottom:12px;">📊 Laporan Rugi Laba Bulan Ini</div>
+      <div class="summary-row">
+        <span class="label">➕ Pemasukan (Nilai Laku)</span>
+        <span id="rlPemasukan" style="color:var(--success);font-weight:600">Rp 0</span>
+      </div>
+      <div class="summary-row">
+        <span class="label">➖ Pengeluaran (Biaya Operasional)</span>
+        <span id="rlPengeluaran" style="color:var(--danger);font-weight:600">Rp 0</span>
+      </div>
+      <div class="summary-row total" style="border-top:2px solid var(--border);margin-top:4px;padding-top:12px;">
+        <span id="rlLabel" style="font-size:15px;">📈 Laba Bersih</span>
+        <span id="rlHasil" style="color:var(--success);font-size:16px;">Rp 0</span>
+      </div>
     </div>
   </div>
 
@@ -547,10 +563,10 @@ function renderDashboard() {
   const s = getSettings();
   if (s.toko) document.getElementById('headerToko').textContent = s.toko;
 
-  // Card: Akumulasi Nilai Laku
-  document.getElementById('cardAkumulasi').textContent = c.harga > 0 ? fmtRp(c.totNilaiLaku) : '—';
+  // Card: Nilai Laku Bulan Ini
+  document.getElementById('cardAkumulasi').textContent = c.harga > 0 ? fmtRp(c.lakuMK * c.harga) : '—';
   document.getElementById('cardAkumulasiSub').textContent = c.harga > 0
-    ? `${c.totLaku} box × ${fmtRp(c.harga)}`
+    ? `${c.lakuMK} box × ${fmtRp(c.harga)} • ${monthLabel(currentMK())}`
     : '⚠️ atur harga per box dulu';
 
   // Card: Laku bulan ini
@@ -808,6 +824,26 @@ function renderLaporan() {
   const sEl = document.getElementById('lapSaldoAkhir');
   sEl.textContent = fmtRp(saldoAkhir)+(saldoAkhir<0?' (kamu utang rebusan)':' (toko masih hutang)');
   sEl.style.color = saldoAkhir>=0?'var(--success)':'var(--danger)';
+
+  // Rugi Laba
+  const rlHasil = nilaiLakuMK - totalKeluarMK;
+  document.getElementById('rlPemasukan').textContent  = harga>0 ? fmtRp(nilaiLakuMK) : `${laku} box × harga belum diset`;
+  document.getElementById('rlPengeluaran').textContent = fmtRp(totalKeluarMK);
+  const rlHasilEl = document.getElementById('rlHasil');
+  const rlLabelEl = document.getElementById('rlLabel');
+  if (harga <= 0) {
+    rlHasilEl.textContent = '— (atur harga dulu)';
+    rlHasilEl.style.color = 'var(--muted)';
+    rlLabelEl.textContent = '📊 Hasil';
+  } else if (rlHasil >= 0) {
+    rlHasilEl.textContent = fmtRp(rlHasil) + ' ✅';
+    rlHasilEl.style.color = 'var(--success)';
+    rlLabelEl.textContent = '📈 Laba Bersih';
+  } else {
+    rlHasilEl.textContent = fmtRp(Math.abs(rlHasil)) + ' ❌';
+    rlHasilEl.style.color = 'var(--danger)';
+    rlLabelEl.textContent = '📉 Rugi Bersih';
+  }
 }
 
 // =========================================================
