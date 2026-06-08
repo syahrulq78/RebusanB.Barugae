@@ -1,4 +1,4 @@
-const CACHE = 'rebusan-v4';
+const CACHE = 'rebusan-v5';
 const FILES = [
   './index.html',
   './manifest.json',

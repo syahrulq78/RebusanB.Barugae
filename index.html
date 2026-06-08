@@ -370,9 +370,25 @@
         <div class="form-group"><label>Tanggal</label><input type="date" id="keluar_tanggal"></div>
         <div class="form-group"><label>Item Pengeluaran</label><select id="keluar_item" onchange="handleItemSelect()"></select></div>
         <div class="form-group" id="keluar_baru_wrap" style="display:none"><label>Nama Item Baru</label><input type="text" id="keluar_baru" placeholder="ketik nama item..."></div>
-        <div class="form-group"><label>Jumlah / Qty</label><input type="number" id="keluar_qty" min="0" step="any" placeholder="mis: 2" inputmode="decimal"></div>
-        <div class="form-group"><label>Satuan</label><input type="text" id="keluar_satuan" placeholder="mis: kg, buah, pcs"></div>
-        <div class="form-group"><label>Harga Total (Rp)</label><input type="number" id="keluar_harga" min="0" placeholder="0" inputmode="numeric"></div>
+        <div class="form-group"><label>Jumlah / Qty</label><input type="number" id="keluar_qty" min="0" step="any" placeholder="mis: 2" inputmode="decimal" oninput="updateHargaPreview()"></div>
+        <div class="form-group">
+          <label>Satuan</label>
+          <input type="text" id="keluar_satuan" list="satuanList" placeholder="pilih atau ketik...">
+          <datalist id="satuanList">
+            <option value="kg">
+            <option value="sisir">
+            <option value="rak">
+            <option value="buah">
+            <option value="bungkus">
+            <option value="pack">
+            <option value="ltr">
+          </datalist>
+        </div>
+        <div class="form-group">
+          <label>Harga Satuan (Rp)</label>
+          <input type="number" id="keluar_harga" min="0" placeholder="0" inputmode="numeric" oninput="updateHargaPreview()">
+          <small id="keluar_harga_preview" style="color:var(--success);font-size:12px;margin-top:3px;display:none;font-weight:600;"></small>
+        </div>
         <div class="form-group full"><label>Catatan (opsional)</label><input type="text" id="keluar_catatan" placeholder="opsional"></div>
       </div>
       <div class="form-actions">
@@ -986,6 +1002,18 @@ function handleItemSelect() {
   document.getElementById('keluar_baru_wrap').style.display=val==='__baru__'?'flex':'none';
   if(val==='__baru__') document.getElementById('keluar_baru').focus();
 }
+function updateHargaPreview() {
+  const qty = parseFloat(document.getElementById('keluar_qty').value) || 0;
+  const hargaSatuan = parseFloat(document.getElementById('keluar_harga').value) || 0;
+  const prev = document.getElementById('keluar_harga_preview');
+  if (qty > 0 && hargaSatuan > 0) {
+    prev.textContent = `Total: ${fmtRp(qty * hargaSatuan)}`;
+    prev.style.display = 'block';
+  } else {
+    prev.style.display = 'none';
+  }
+}
+
 let editingKeluarId=null;
 function simpanKeluar() {
   const tgl=document.getElementById('keluar_tanggal').value;
@@ -993,7 +1021,9 @@ function simpanKeluar() {
   const baru=document.getElementById('keluar_baru').value.trim();
   const qty=document.getElementById('keluar_qty').value.trim();
   const satuan=document.getElementById('keluar_satuan').value.trim();
-  const harga=parseFloat(document.getElementById('keluar_harga').value)||0;
+  const hargaSatuan=parseFloat(document.getElementById('keluar_harga').value)||0;
+  const qtyNum=parseFloat(qty)||0;
+  const harga=qtyNum>0&&hargaSatuan>0?qtyNum*hargaSatuan:hargaSatuan; // total = qty × harga satuan
   const catatan=document.getElementById('keluar_catatan').value.trim();
   if(!tgl){alert('Tanggal wajib diisi!');return;}
   if(item==='__baru__'){
@@ -1003,13 +1033,13 @@ function simpanKeluar() {
     if(!custom.includes(baru)&&!DEFAULT_ITEMS.includes(baru)){custom.push(baru);save('rb_items',custom);}
   }
   if(!item){alert('Item pengeluaran wajib dipilih!');return;}
-  if(harga<=0){alert('Harga wajib diisi!');return;}
+  if(hargaSatuan<=0){alert('Harga satuan wajib diisi!');return;}
   const data=getPengeluaran();
   if(editingKeluarId!==null){
     const idx=data.findIndex(e=>e.id===editingKeluarId);
-    if(idx!==-1) data[idx]={id:editingKeluarId,tanggal:tgl,item,qty,satuan,harga,catatan};
+    if(idx!==-1) data[idx]={id:editingKeluarId,tanggal:tgl,item,qty,satuan,harga_satuan:hargaSatuan,harga,catatan};
     batalEditKeluar();
-  } else { data.push({id:Date.now(),tanggal:tgl,item,qty,satuan,harga,catatan}); }
+  } else { data.push({id:Date.now(),tanggal:tgl,item,qty,satuan,harga_satuan:hargaSatuan,harga,catatan}); }
   data.sort((a,b)=>b.tanggal.localeCompare(a.tanggal));
   save('rb_keluar',data);
   { const _r=data.find(e=>e.tanggal===tgl&&e.item===item&&e.harga===harga); if(_r) sbUpsert('pengeluaran',_r); }
@@ -1024,9 +1054,12 @@ function editKeluar(id) {
   document.getElementById('keluar_tanggal').value=e.tanggal;
   document.getElementById('keluar_qty').value=e.qty||'';
   document.getElementById('keluar_satuan').value=e.satuan||'';
-  document.getElementById('keluar_harga').value=e.harga||'';
+  // Tampilkan harga satuan (bukan total) saat edit
+  const qtyN=parseFloat(e.qty)||0;
+  document.getElementById('keluar_harga').value=e.harga_satuan||(qtyN>0?Math.round(e.harga/qtyN):e.harga)||'';
   document.getElementById('keluar_catatan').value=e.catatan||'';
   populateItemSelect(); document.getElementById('keluar_item').value=e.item;
+  updateHargaPreview();
   document.getElementById('keluar_baru_wrap').style.display='none';
   document.getElementById('formKeluarTitle').textContent='✏️ Edit Pengeluaran';
   document.getElementById('btnSimpanKeluar').textContent='💾 Update';
@@ -1038,6 +1071,7 @@ function batalEditKeluar() {
   editingKeluarId=null;
   document.getElementById('keluar_tanggal').value=todayStr();
   ['keluar_qty','keluar_satuan','keluar_harga','keluar_catatan','keluar_baru'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('keluar_harga_preview').style.display='none';
   document.getElementById('keluar_baru_wrap').style.display='none';
   document.getElementById('formKeluarTitle').textContent='💸 Catat Pengeluaran';
   document.getElementById('btnSimpanKeluar').textContent='💾 Simpan';
@@ -1067,7 +1101,10 @@ function renderKeluarTable() {
     <tr>
       <td>${fmtTgl(e.tanggal)}</td><td><strong>${e.item}</strong></td>
       <td style="color:var(--muted);font-size:12px">${e.qty?e.qty+' '+(e.satuan||''):'-'}</td>
-      <td><strong style="color:var(--danger)">${fmtRp(e.harga)}</strong></td>
+      <td>
+        <strong style="color:var(--danger)">${fmtRp(e.harga)}</strong>
+        ${e.harga_satuan&&parseFloat(e.qty)>0?`<br><small style="color:var(--muted)">${fmtRp(e.harga_satuan)}/${e.satuan||'unit'}</small>`:''}
+      </td>
       <td style="color:var(--muted);font-size:12px">${e.catatan||'-'}</td>
       <td style="white-space:nowrap">
         <button class="btn btn-edit" onclick="editKeluar(${e.id})">✏️</button>
