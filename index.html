@@ -3,1500 +3,683 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Beppa Barugae — Kue Tradisional Bugis yang Naik Kelas | Makassar</title>
-  <meta name="description" content="Beppa Barugae, produsen kue tradisional Bugis premium di Makassar. 60+ jenis kue autentik, segar dibuat harian. Pesan via WhatsApp, tersedia di GoFood.">
-  <meta name="keywords" content="kue tradisional bugis, kue makassar, beppa barugae, kue kampung, hampers makassar, snack box">
-  <meta property="og:title" content="Beppa Barugae — Kue Tradisional Bugis yang Naik Kelas">
-  <meta property="og:description" content="Kue tradisional Bugis premium, autentik, segar setiap hari. Pesan sekarang via WhatsApp!">
-  <meta property="og:type" content="website">
-
+  <title>Beppa Barugae &mdash; Kedai Kue Tradisional &amp; Kekinian | Makassar</title>
+  <meta name="description" content="Beppa Barugae, kedai kue tradisional dan kekinian di Jl. Raya Baruga, Makassar. 100+ jenis kue autentik, segar setiap hari.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    /* ===== CSS VARIABLES ===== */
     :root {
-      --c-dark:    #2C1810;
-      --c-brown:   #5D3A1A;
-      --c-med:     #8B5E3C;
-      --c-gold:    #C9A84C;
-      --c-gold2:   #E8C96B;
-      --c-maroon:  #7B2D3E;
-      --c-maroon2: #9E3D52;
-      --c-cream:   #FFF8F0;
-      --c-cream2:  #F5E6D3;
-      --c-cream3:  #EDD5B8;
-      --c-white:   #FFFFFF;
-      --font-display: 'Playfair Display', Georgia, serif;
-      --font-body:    'Poppins', system-ui, sans-serif;
-      --shadow-sm:  0 2px 8px rgba(44, 24, 16, 0.10);
-      --shadow-md:  0 4px 20px rgba(44, 24, 16, 0.15);
-      --shadow-lg:  0 8px 40px rgba(44, 24, 16, 0.20);
-      --shadow-xl:  0 16px 60px rgba(44, 24, 16, 0.25);
-      --radius-sm:  8px;
-      --radius-md:  16px;
-      --radius-lg:  24px;
-      --trans: 0.35s ease;
+      --orange:     #D4691E;
+      --orange2:    #E8862A;
+      --orange-lt:  #F5A55A;
+      --brown-dk:   #2D1006;
+      --brown:      #5C2E0A;
+      --brown-med:  #8B4513;
+      --red:        #8B1414;
+      --red2:       #A31818;
+      --cream:      #FFF8F0;
+      --cream2:     #F5E6D3;
+      --cream3:     #EDD5B8;
+      --white:      #FFFFFF;
+      --text:       #2D1006;
+      --text-med:   #6B3A1A;
+      --gold:       #E8A84C;
+      --gold2:      #F5C76E;
+      --font-h:     'Lilita One', cursive;
+      --font-b:     'Nunito', sans-serif;
+      --sh-sm:  0 2px 8px rgba(45,16,6,.10);
+      --sh-md:  0 4px 20px rgba(45,16,6,.15);
+      --sh-lg:  0 8px 40px rgba(45,16,6,.20);
+      --sh-xl:  0 16px 60px rgba(45,16,6,.25);
+      --r-sm: 8px; --r-md: 16px; --r-lg: 24px;
+      --tr: 0.3s ease;
       --nav-h: 72px;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-b);background:var(--cream);color:var(--text);line-height:1.7;overflow-x:hidden;}
+    img{max-width:100%;display:block;}
+    a{text-decoration:none;color:inherit;}
+    ul{list-style:none;}
+    button{font-family:inherit;cursor:pointer;border:none;background:none;}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;}
 
-    /* ===== RESET ===== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--font-body);
-      background: var(--c-cream);
-      color: var(--c-dark);
-      line-height: 1.7;
-      overflow-x: hidden;
-    }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    /* REVEAL */
+    .reveal,.reveal-l,.reveal-r{opacity:0;transition:opacity .7s ease,transform .7s ease;}
+    .reveal{transform:translateY(36px);}
+    .reveal-l{transform:translateX(-36px);}
+    .reveal-r{transform:translateX(36px);}
+    .reveal.on,.reveal-l.on,.reveal-r.on{opacity:1;transform:none;}
 
-    /* ===== UTILITIES ===== */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.9rem, 4vw, 2.8rem);
-      font-weight: 700;
-      color: var(--c-brown);
-      text-align: center;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    .section-subtitle {
-      font-size: 0.95rem;
-      color: var(--c-med);
-      text-align: center;
-      max-width: 580px;
-      margin: 0 auto 48px;
-      line-height: 1.8;
-    }
-    .section-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, rgba(201,168,76,0.18), rgba(201,168,76,0.1));
-      border: 1px solid rgba(201,168,76,0.35);
-      color: var(--c-brown);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 6px 18px;
-      border-radius: 50px;
-      margin-bottom: 16px;
-    }
-    .divider {
-      width: 56px;
-      height: 3px;
-      background: linear-gradient(to right, var(--c-maroon), var(--c-gold));
-      border-radius: 2px;
-      margin: 10px auto 22px;
-    }
+    /* SECTION HELPERS */
+    .sec-badge{display:inline-block;background:rgba(212,105,30,.12);border:1px solid rgba(212,105,30,.3);color:var(--brown);font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:5px 16px;border-radius:50px;margin-bottom:14px;}
+    .sec-title{font-family:var(--font-h);font-size:clamp(1.8rem,4vw,2.7rem);color:var(--brown-dk);text-align:center;margin-bottom:10px;line-height:1.2;}
+    .sec-sub{font-size:.93rem;color:var(--text-med);text-align:center;max-width:560px;margin:0 auto 44px;line-height:1.8;}
+    .divider{width:52px;height:3px;background:linear-gradient(to right,var(--red),var(--orange));border-radius:2px;margin:8px auto 20px;}
 
-    /* ===== SCROLL ANIMATIONS ===== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(36px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-    /* ===== NAVIGATION ===== */
-    .nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 1000;
-      height: var(--nav-h);
-      transition: background 0.4s ease, box-shadow 0.4s ease;
-    }
-    .nav.scrolled {
-      background: rgba(255, 248, 240, 0.97);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: var(--shadow-sm);
-    }
-    .nav-inner {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .nav-logo-icon {
-      width: 42px; height: 42px;
-      background: linear-gradient(135deg, var(--c-maroon), var(--c-brown));
-      border-radius: 11px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-    .nav-logo-text {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--c-brown);
-      line-height: 1.2;
-    }
-    .nav-logo-text small {
-      display: block;
-      font-family: var(--font-body);
-      font-size: 0.62rem;
-      font-weight: 400;
-      color: var(--c-med);
-      letter-spacing: 0.05em;
-    }
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-    }
-    .nav-links a {
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--c-dark);
-      position: relative;
-      padding-bottom: 3px;
-      transition: color var(--trans);
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--c-gold);
-      border-radius: 2px;
-      transition: width var(--trans);
-    }
-    .nav-links a:hover { color: var(--c-brown); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-cta {
-      background: linear-gradient(135deg, var(--c-maroon), var(--c-maroon2));
-      color: var(--c-white) !important;
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-weight: 600 !important;
-      font-size: 0.85rem;
-      transition: transform var(--trans), box-shadow var(--trans);
-      letter-spacing: 0.01em;
-    }
-    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(123,45,62,0.4); }
-    .nav-cta::after { display: none !important; }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      padding: 8px;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px; height: 2px;
-      background: var(--c-brown);
-      border-radius: 2px;
-      transition: var(--trans);
-    }
-    .nav-hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-    .nav-hamburger.active span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
-    .nav-mobile {
-      display: none;
-      position: fixed;
-      top: var(--nav-h); left: 0; right: 0;
-      background: rgba(255, 248, 240, 0.98);
-      backdrop-filter: blur(16px);
-      padding: 20px 24px 28px;
-      box-shadow: var(--shadow-md);
-      z-index: 999;
-      flex-direction: column;
-      gap: 4px;
-      border-top: 1px solid var(--c-cream3);
-    }
-    .nav-mobile.open { display: flex; }
-    .nav-mobile a {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--c-dark);
-      padding: 12px 0;
-      border-bottom: 1px solid var(--c-cream3);
-      transition: color var(--trans);
-    }
-    .nav-mobile a:hover { color: var(--c-maroon); }
-    .nav-mobile .nav-cta { border-bottom: none; text-align: center; margin-top: 12px; display: block; }
+    /* ===== NAV ===== */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);transition:background .4s,box-shadow .4s;}
+    .nav.scrolled{background:rgba(255,248,240,.97);backdrop-filter:blur(16px);box-shadow:var(--sh-sm);}
+    .nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;gap:10px;}
+    .nav-logo img{width:46px;height:46px;object-fit:contain;border-radius:10px;background:#fff;padding:2px;box-shadow:var(--sh-sm);}
+    .nav-logo-text{font-family:var(--font-h);font-size:1.2rem;color:var(--brown-dk);line-height:1.1;}
+    .nav-logo-text small{display:block;font-family:var(--font-b);font-size:.6rem;font-weight:600;color:var(--red);letter-spacing:.08em;text-transform:uppercase;}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:.875rem;font-weight:700;color:var(--brown-dk);position:relative;padding-bottom:2px;}
+    .nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--orange);border-radius:2px;transition:width var(--tr);}
+    .nav-links a:hover::after{width:100%;}
+    .nav-cta{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white)!important;padding:10px 20px;border-radius:50px;font-weight:700!important;font-size:.84rem;transition:transform var(--tr),box-shadow var(--tr);}
+    .nav-cta:hover{transform:translateY(-2px);box-shadow:0 4px 16px rgba(139,20,20,.4);}
+    .nav-cta::after{display:none!important;}
+    .nav-ham{display:none;flex-direction:column;gap:5px;padding:8px;}
+    .nav-ham span{display:block;width:24px;height:2px;background:var(--brown-dk);border-radius:2px;transition:var(--tr);}
+    .nav-ham.on span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+    .nav-ham.on span:nth-child(2){opacity:0;}
+    .nav-ham.on span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
+    .nav-mob{display:none;position:fixed;top:var(--nav-h);left:0;right:0;background:rgba(255,248,240,.98);backdrop-filter:blur(16px);padding:20px 24px 28px;box-shadow:var(--sh-md);z-index:999;flex-direction:column;gap:4px;border-top:1px solid var(--cream3);}
+    .nav-mob.on{display:flex;}
+    .nav-mob a{font-size:1rem;font-weight:700;color:var(--brown-dk);padding:11px 0;border-bottom:1px solid var(--cream3);}
+    .nav-mob .nav-cta{border-bottom:none;text-align:center;margin-top:10px;display:block;}
 
     /* ===== HERO ===== */
-    .hero {
-      min-height: 100vh;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: linear-gradient(158deg, #1a0d08 0%, #3D1F0D 30%, #6B3A1F 60%, #9A6B3A 85%, #C9A84C 100%);
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(ellipse at 15% 85%, rgba(201,168,76,0.18) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 15%, rgba(123,45,62,0.22) 0%, transparent 55%),
-        radial-gradient(circle at 50% 50%, rgba(255,248,240,0.04) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-decor {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-    .hero-decor-1 {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
-      top: -200px; right: -150px;
-    }
-    .hero-decor-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(123,45,62,0.14) 0%, transparent 70%);
-      bottom: -120px; left: -100px;
-    }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 110px 24px 80px;
-      max-width: 820px;
-      width: 100%;
-    }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(201,168,76,0.18);
-      border: 1px solid rgba(201,168,76,0.35);
-      color: var(--c-gold2);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      padding: 8px 20px;
-      border-radius: 50px;
-      margin-bottom: 28px;
-      animation: fadeDown 0.8s ease 0.1s both;
-    }
-    .hero-title {
-      font-family: var(--font-display);
-      font-size: clamp(3.2rem, 9vw, 6rem);
-      font-weight: 800;
-      color: var(--c-white);
-      line-height: 1.05;
-      margin-bottom: 6px;
-      animation: fadeDown 0.8s ease 0.25s both;
-      letter-spacing: -0.01em;
-    }
-    .hero-title-sub {
-      display: block;
-      font-style: italic;
-      background: linear-gradient(135deg, var(--c-gold) 20%, var(--c-gold2) 80%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: clamp(2rem, 5.5vw, 3.8rem);
-    }
-    .hero-tagline {
-      font-size: clamp(0.95rem, 2.2vw, 1.15rem);
-      color: rgba(255,248,240,0.82);
-      font-weight: 300;
-      margin-bottom: 44px;
-      letter-spacing: 0.02em;
-      line-height: 1.8;
-      animation: fadeDown 0.8s ease 0.4s both;
-    }
-    .hero-tagline strong { color: var(--c-gold2); font-weight: 600; }
-    .hero-actions {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeDown 0.8s ease 0.55s both;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.35s ease;
-      cursor: pointer;
-      letter-spacing: 0.01em;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--c-maroon), #A83248);
-      color: var(--c-white);
-      box-shadow: 0 4px 20px rgba(123,45,62,0.5);
-    }
-    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(123,45,62,0.6); }
-    .btn-outline {
-      background: transparent;
-      color: var(--c-white);
-      border: 2px solid rgba(255,255,255,0.38);
-      backdrop-filter: blur(8px);
-    }
-    .btn-outline:hover { border-color: var(--c-gold); color: var(--c-gold); transform: translateY(-3px); }
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 28px; left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,248,240,0.5);
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      animation: bounceY 2.2s ease-in-out infinite;
-    }
-    .hero-scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(255,248,240,0.5), transparent); }
+    .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(158deg,#1A0800 0%,#3D1A06 30%,#6B3010 60%,#A85020 85%,#D4691E 100%);}
+    .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 15% 85%,rgba(232,168,76,.18) 0%,transparent 55%),radial-gradient(ellipse at 85% 15%,rgba(139,20,20,.2) 0%,transparent 55%);pointer-events:none;}
+    .hero-ring{position:absolute;border-radius:50%;pointer-events:none;}
+    .hero-ring-1{width:700px;height:700px;border:1px solid rgba(232,168,76,.1);top:-200px;right:-150px;}
+    .hero-ring-2{width:500px;height:500px;border:1px solid rgba(139,20,20,.12);bottom:-150px;left:-100px;}
+    .hero-content{position:relative;z-index:2;text-align:center;padding:110px 24px 80px;max-width:800px;width:100%;}
+    .hero-logo{width:140px;height:140px;object-fit:contain;margin:0 auto 16px;filter:drop-shadow(0 4px 20px rgba(0,0,0,.4));animation:fadeDown .8s ease .1s both;}
+    .hero-name{font-family:var(--font-h);font-size:clamp(3rem,9vw,5.5rem);color:var(--white);line-height:1;margin-bottom:6px;text-shadow:0 2px 20px rgba(0,0,0,.3);animation:fadeDown .8s ease .25s both;}
+    .hero-name span{display:block;color:var(--orange-lt);}
+    .hero-tag{font-family:var(--font-h);font-size:clamp(.9rem,2.5vw,1.1rem);color:var(--gold2);letter-spacing:.08em;margin-bottom:28px;animation:fadeDown .8s ease .35s both;}
+    .hero-desc{font-size:clamp(.9rem,2vw,1.05rem);color:rgba(255,248,240,.8);margin-bottom:40px;line-height:1.8;animation:fadeDown .8s ease .45s both;}
+    .hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeDown .8s ease .55s both;}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:50px;font-size:.88rem;font-weight:800;transition:all var(--tr);cursor:pointer;white-space:nowrap;font-family:var(--font-b);}
+    .btn-red{background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);box-shadow:0 4px 20px rgba(139,20,20,.5);}
+    .btn-red:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(139,20,20,.6);}
+    .btn-ghost{background:transparent;color:var(--white);border:2px solid rgba(255,255,255,.35);backdrop-filter:blur(8px);}
+    .btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);}
+    .hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(255,248,240,.45);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;animation:bounceY 2.2s ease-in-out infinite;}
+    .hero-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,rgba(255,248,240,.45),transparent);}
 
-    /* ===== STATS BAR ===== */
-    .stats-bar {
-      background: linear-gradient(135deg, var(--c-dark) 0%, var(--c-brown) 100%);
-      padding: 28px 0;
-    }
-    .stats-inner {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-    .stat-item {
-      text-align: center;
-      padding: 12px 40px;
-      position: relative;
-    }
-    .stat-item:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 50%;
-      transform: translateY(-50%);
-      width: 1px; height: 36px;
-      background: rgba(255,248,240,0.15);
-    }
-    .stat-num {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--c-gold2);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-label { font-size: 0.78rem; color: rgba(255,248,240,0.65); font-weight: 300; }
+    /* ===== STATS ===== */
+    .stats{background:linear-gradient(135deg,var(--brown-dk),var(--brown));padding:26px 0;}
+    .stats-inner{display:flex;justify-content:center;flex-wrap:wrap;}
+    .stat{text-align:center;padding:10px 40px;position:relative;}
+    .stat:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;transform:translateY(-50%);width:1px;height:32px;background:rgba(255,248,240,.12);}
+    .stat-n{font-family:var(--font-h);font-size:1.9rem;color:var(--gold2);line-height:1;}
+    .stat-l{font-size:.75rem;color:rgba(255,248,240,.6);margin-top:3px;font-weight:600;}
 
     /* ===== ABOUT ===== */
-    .about { padding: 96px 0; background: var(--c-cream); }
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-    }
-    .about-img-wrap { position: relative; }
-    .about-img-main {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-xl);
-    }
-    .about-img-badge {
-      position: absolute;
-      bottom: -20px; right: -20px;
-      width: 120px; height: 120px;
-      background: linear-gradient(135deg, var(--c-maroon), #A83248);
-      border-radius: 50%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      color: var(--c-white);
-      box-shadow: var(--shadow-md);
-      text-align: center;
-      border: 4px solid var(--c-cream);
-    }
-    .about-img-badge strong {
-      font-family: var(--font-display);
-      font-size: 1.8rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .about-img-badge span { font-size: 0.65rem; font-weight: 400; opacity: 0.9; margin-top: 2px; }
-    .about-text { padding-left: 8px; }
-    .about-story {
-      color: var(--c-med);
-      line-height: 1.9;
-      margin-bottom: 20px;
-      font-size: 0.93rem;
-    }
-    .about-story strong { color: var(--c-brown); }
-    .about-values {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 32px;
-    }
-    .about-value {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px 20px;
-      background: var(--c-cream2);
-      border-radius: var(--radius-sm);
-      border-left: 3px solid var(--c-gold);
-    }
-    .about-value-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; }
-    .about-value-title { font-size: 0.88rem; font-weight: 600; color: var(--c-brown); margin-bottom: 3px; }
-    .about-value-desc { font-size: 0.8rem; color: var(--c-med); line-height: 1.5; }
-    .about-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .about-feature {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.82rem; color: var(--c-med); font-weight: 500;
-    }
-    .about-feature::before { content: '✓'; color: var(--c-gold); font-weight: 700; font-size: 0.9rem; }
+    .about{padding:96px 0;background:var(--cream);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:center;}
+    .about-img-wrap{position:relative;}
+    .about-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--r-lg);box-shadow:var(--sh-xl);}
+    .about-badge{position:absolute;bottom:-20px;right:-20px;width:120px;height:120px;background:linear-gradient(135deg,var(--red),var(--red2));border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--white);box-shadow:var(--sh-md);text-align:center;border:4px solid var(--cream);}
+    .about-badge strong{font-family:var(--font-h);font-size:1.8rem;line-height:1;}
+    .about-badge span{font-size:.62rem;font-weight:600;opacity:.9;margin-top:1px;}
+    .about-text{padding-left:8px;}
+    .about-p{color:var(--text-med);line-height:1.9;margin-bottom:18px;font-size:.92rem;}
+    .about-p strong{color:var(--brown-dk);}
+    .values{display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+    .value{display:flex;align-items:flex-start;gap:12px;padding:14px 18px;background:var(--cream2);border-radius:var(--r-sm);border-left:3px solid var(--orange);}
+    .value-icon{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+    .value-title{font-size:.84rem;font-weight:800;color:var(--brown-dk);margin-bottom:2px;}
+    .value-desc{font-size:.78rem;color:var(--text-med);line-height:1.5;}
+    .about-chips{display:flex;flex-wrap:wrap;gap:8px;}
+    .chip{display:inline-flex;align-items:center;gap:5px;background:var(--cream2);border:1px solid var(--cream3);color:var(--brown-med);font-size:.75rem;font-weight:700;padding:6px 12px;border-radius:50px;}
 
     /* ===== MENU ===== */
-    .menu { padding: 96px 0; background: var(--c-cream2); }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-    .menu-card {
-      background: var(--c-white);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform var(--trans), box-shadow var(--trans);
-    }
-    .menu-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
-    .menu-card-img-wrap { overflow: hidden; position: relative; }
-    .menu-card-img {
-      width: 100%; aspect-ratio: 4/3;
-      object-fit: cover;
-      transition: transform 0.55s ease;
-    }
-    .menu-card:hover .menu-card-img { transform: scale(1.07); }
-    .menu-card-tag {
-      position: absolute; top: 10px; right: 10px;
-      background: var(--c-maroon);
-      color: var(--c-white);
-      font-size: 0.65rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 50px;
-      letter-spacing: 0.04em;
-    }
-    .menu-card-tag.trad { background: var(--c-brown); }
-    .menu-card-tag.new { background: var(--c-maroon); }
-    .menu-card-body { padding: 18px 18px 20px; }
-    .menu-card-name {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--c-brown);
-      margin-bottom: 6px;
-      line-height: 1.3;
-    }
-    .menu-card-desc {
-      font-size: 0.78rem;
-      color: var(--c-med);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-    .menu-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    .menu-card-price {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--c-maroon);
-      line-height: 1.2;
-    }
-    .menu-card-price small { display: block; font-family: var(--font-body); font-size: 0.65rem; color: var(--c-med); font-weight: 400; }
-    .menu-card-btn {
-      background: linear-gradient(135deg, var(--c-gold), var(--c-gold2));
-      color: var(--c-brown);
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 8px 14px;
-      border-radius: 50px;
-      transition: var(--trans);
-      white-space: nowrap;
-    }
-    .menu-card-btn:hover { background: linear-gradient(135deg, var(--c-maroon), var(--c-maroon2)); color: var(--c-white); }
+    .menu{padding:96px 0;background:var(--cream2);}
+    .menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+    .card{background:var(--white);border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sh-sm);transition:transform var(--tr),box-shadow var(--tr);}
+    .card:hover{transform:translateY(-8px);box-shadow:var(--sh-lg);}
+    .card-img-wrap{overflow:hidden;position:relative;}
+    .card-img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .5s ease;}
+    .card:hover .card-img{transform:scale(1.07);}
+    .card-tag{position:absolute;top:10px;right:10px;font-family:var(--font-b);font-size:.65rem;font-weight:800;padding:4px 10px;border-radius:50px;letter-spacing:.04em;}
+    .tag-trad{background:var(--brown);color:var(--white);}
+    .tag-new{background:var(--red);color:var(--white);}
+    .tag-hot{background:var(--orange);color:var(--white);}
+    .card-body{padding:16px 16px 18px;}
+    .card-name{font-family:var(--font-h);font-size:1rem;color:var(--brown-dk);margin-bottom:5px;line-height:1.25;}
+    .card-desc{font-size:.76rem;color:var(--text-med);line-height:1.6;margin-bottom:13px;}
+    .card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .card-price{font-family:var(--font-h);font-size:.95rem;color:var(--red);line-height:1.2;}
+    .card-price small{display:block;font-family:var(--font-b);font-size:.62rem;color:var(--text-med);font-weight:600;}
+    .card-btn{background:linear-gradient(135deg,var(--orange),var(--orange2));color:var(--white);font-size:.7rem;font-weight:800;padding:7px 13px;border-radius:50px;transition:var(--tr);white-space:nowrap;}
+    .card-btn:hover{background:linear-gradient(135deg,var(--red),var(--red2));}
+    .menu-more{text-align:center;margin-top:36px;}
+    .menu-more-note{display:inline-block;background:var(--white);border:2px solid var(--cream3);color:var(--text-med);font-size:.84rem;font-weight:700;padding:12px 28px;border-radius:50px;}
 
     /* ===== GALLERY ===== */
-    .gallery { padding: 96px 0; background: var(--c-cream); }
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-auto-rows: 260px;
-      gap: 14px;
-    }
-    .gallery-item { overflow: hidden; border-radius: var(--radius-md); position: relative; cursor: pointer; }
-    .gallery-item.tall { grid-row: span 2; }
-    .gallery-item.wide { grid-column: span 2; }
-    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.55s ease; }
-    .gallery-item:hover img { transform: scale(1.07); }
-    .gallery-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(44,24,16,0.55) 0%, transparent 55%);
-      opacity: 0;
-      transition: opacity var(--trans);
-    }
-    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery{padding:96px 0;background:var(--cream);}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:255px;gap:13px;}
+    .g-item{overflow:hidden;border-radius:var(--r-md);position:relative;cursor:pointer;}
+    .g-item.tall{grid-row:span 2;}
+    .g-item.wide{grid-column:span 2;}
+    .g-item img{width:100%;height:100%;object-fit:cover;transition:transform .55s ease;}
+    .g-item:hover img{transform:scale(1.07);}
+    .g-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(45,16,6,.5) 0%,transparent 55%);opacity:0;transition:opacity var(--tr);}
+    .g-item:hover .g-overlay{opacity:1;}
 
     /* ===== TESTIMONIALS ===== */
-    .testimonials {
-      padding: 96px 0;
-      background: linear-gradient(140deg, #2C1810 0%, #5D3A1A 55%, #3D1F0D 100%);
-      position: relative; overflow: hidden;
-    }
-    .testimonials::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        radial-gradient(ellipse at 5% 95%, rgba(201,168,76,0.12) 0%, transparent 45%),
-        radial-gradient(ellipse at 95% 5%, rgba(123,45,62,0.15) 0%, transparent 45%);
-      pointer-events: none;
-    }
-    .testimonials .section-title { color: var(--c-cream); }
-    .testimonials .section-subtitle { color: rgba(255,248,240,0.68); }
-    .testimonials .divider { background: linear-gradient(to right, var(--c-gold), var(--c-gold2)); }
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      position: relative; z-index: 2;
-    }
-    .testi-card {
-      background: rgba(255,248,240,0.07);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: var(--radius-md);
-      padding: 28px;
-      backdrop-filter: blur(8px);
-      transition: transform var(--trans), background var(--trans);
-    }
-    .testi-card:hover { transform: translateY(-6px); background: rgba(255,248,240,0.11); }
-    .testi-stars { color: var(--c-gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 14px; }
-    .testi-text {
-      color: rgba(255,248,240,0.88);
-      font-size: 0.88rem;
-      line-height: 1.85;
-      margin-bottom: 22px;
-      font-style: italic;
-    }
-    .testi-author { display: flex; align-items: center; gap: 12px; }
-    .testi-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--c-gold);
-      flex-shrink: 0;
-    }
-    .testi-name { font-weight: 600; color: var(--c-cream); font-size: 0.875rem; }
-    .testi-role { font-size: 0.72rem; color: rgba(255,248,240,0.55); margin-top: 1px; }
-    .testi-quote-icon {
-      font-family: var(--font-display);
-      font-size: 3rem;
-      color: var(--c-gold);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
+    .testi{padding:96px 0;background:linear-gradient(140deg,var(--brown-dk) 0%,var(--brown) 60%,#3D1A06 100%);position:relative;overflow:hidden;}
+    .testi::before{content:'';position:absolute;inset:0;background-image:radial-gradient(ellipse at 5% 95%,rgba(232,168,76,.12) 0%,transparent 45%),radial-gradient(ellipse at 95% 5%,rgba(139,20,20,.15) 0%,transparent 45%);pointer-events:none;}
+    .testi .sec-title{color:var(--cream);}
+    .testi .sec-sub{color:rgba(255,248,240,.65);}
+    .testi .divider{background:linear-gradient(to right,var(--gold),var(--gold2));}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative;z-index:2;}
+    .t-card{background:rgba(255,248,240,.07);border:1px solid rgba(232,168,76,.18);border-radius:var(--r-md);padding:26px;backdrop-filter:blur(8px);transition:transform var(--tr),background var(--tr);}
+    .t-card:hover{transform:translateY(-6px);background:rgba(255,248,240,.11);}
+    .t-stars{color:var(--gold);font-size:.88rem;letter-spacing:2px;margin-bottom:12px;}
+    .t-text{color:rgba(255,248,240,.88);font-size:.86rem;line-height:1.85;margin-bottom:20px;font-style:italic;}
+    .t-q{font-family:var(--font-h);font-size:2.5rem;color:var(--gold);opacity:.3;line-height:1;margin-bottom:6px;}
+    .t-author{display:flex;align-items:center;gap:10px;}
+    .t-ava{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);flex-shrink:0;}
+    .t-name{font-weight:800;color:var(--cream);font-size:.84rem;}
+    .t-role{font-size:.7rem;color:rgba(255,248,240,.5);margin-top:1px;}
 
     /* ===== CONTACT ===== */
-    .contact { padding: 96px 0; background: var(--c-cream2); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .contact-info-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--c-brown);
-      margin-bottom: 24px;
-    }
-    .contact-items { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-    .contact-item {
-      display: flex; align-items: flex-start; gap: 14px;
-      padding: 14px 16px;
-      background: var(--c-white);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-sm);
-    }
-    .contact-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-    }
-    .contact-icon.ic-loc { background: rgba(93,58,26,0.1); }
-    .contact-icon.ic-time { background: rgba(201,168,76,0.15); }
-    .contact-icon.ic-wa { background: rgba(37,211,102,0.12); }
-    .contact-icon.ic-food { background: rgba(255,87,34,0.1); }
-    .contact-label { font-size: 0.72rem; font-weight: 600; color: var(--c-med); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
-    .contact-value { font-size: 0.88rem; color: var(--c-dark); font-weight: 500; line-height: 1.5; }
-    .contact-value a { color: var(--c-maroon); font-weight: 600; }
-    .btn-wa {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      color: var(--c-white);
-      padding: 15px 32px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-      transition: var(--trans);
-      margin-bottom: 22px;
-    }
-    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(37,211,102,0.55); }
-    .social-wrap { display: flex; gap: 10px; align-items: center; }
-    .social-label { font-size: 0.82rem; color: var(--c-med); font-weight: 500; }
-    .social-btn {
-      width: 42px; height: 42px;
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      transition: var(--trans);
-    }
-    .social-btn:hover { transform: translateY(-4px) scale(1.1); box-shadow: var(--shadow-md); }
-    .social-btn.ig { background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045); }
-    .social-btn.fb { background: #1877F2; }
-    .contact-map-wrap {
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-md);
-    }
-    .contact-map-wrap iframe { width: 100%; height: 360px; border: none; display: block; }
-    .map-link {
-      display: block; text-align: center;
-      padding: 13px;
-      background: var(--c-brown);
-      color: var(--c-white);
-      font-size: 0.84rem; font-weight: 600;
-      transition: background var(--trans);
-    }
-    .map-link:hover { background: var(--c-dark); }
-    .order-steps {
-      margin-top: 22px;
-      padding: 22px;
-      background: var(--c-white);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-    }
-    .order-steps-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--c-brown); margin-bottom: 14px; }
-    .order-step {
-      display: flex; align-items: flex-start; gap: 12px;
-      margin-bottom: 10px;
-    }
-    .order-step:last-child { margin-bottom: 0; }
-    .order-step-num {
-      width: 24px; height: 24px;
-      background: linear-gradient(135deg, var(--c-maroon), var(--c-maroon2));
-      color: var(--c-white);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.72rem; font-weight: 700;
-      flex-shrink: 0; margin-top: 1px;
-    }
-    .order-step-text { font-size: 0.82rem; color: var(--c-med); line-height: 1.5; }
+    .contact{padding:96px 0;background:var(--cream2);}
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+    .c-title{font-family:var(--font-h);font-size:1.4rem;color:var(--brown-dk);margin-bottom:22px;}
+    .c-items{display:flex;flex-direction:column;gap:12px;margin-bottom:26px;}
+    .c-item{display:flex;align-items:flex-start;gap:13px;padding:13px 15px;background:var(--white);border-radius:var(--r-sm);box-shadow:var(--sh-sm);}
+    .c-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+    .ci-loc{background:rgba(92,46,10,.1);}
+    .ci-time{background:rgba(232,168,76,.15);}
+    .ci-wa{background:rgba(37,211,102,.12);}
+    .ci-food{background:rgba(255,87,34,.1);}
+    .c-lbl{font-size:.7rem;font-weight:800;color:var(--text-med);text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;}
+    .c-val{font-size:.86rem;color:var(--text);font-weight:600;line-height:1.5;}
+    .c-val a{color:var(--red);font-weight:800;}
+    .btn-wa{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25D366,#128C7E);color:var(--white);padding:14px 30px;border-radius:50px;font-weight:800;font-size:.92rem;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:var(--tr);margin-bottom:20px;font-family:var(--font-b);}
+    .btn-wa:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(37,211,102,.55);}
+    .socials{display:flex;gap:9px;align-items:center;}
+    .soc-lbl{font-size:.8rem;color:var(--text-med);font-weight:700;}
+    .soc-btn{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;transition:var(--tr);}
+    .soc-btn:hover{transform:translateY(-4px) scale(1.1);box-shadow:var(--sh-md);}
+    .soc-ig{background:linear-gradient(135deg,#833AB4,#FD1D1D,#FCB045);}
+    .soc-fb{background:#1877F2;}
+    .map-wrap{border-radius:var(--r-md);overflow:hidden;box-shadow:var(--sh-md);}
+    .map-wrap iframe{width:100%;height:350px;border:none;display:block;}
+    .map-link{display:block;text-align:center;padding:12px;background:var(--brown-dk);color:var(--white);font-size:.82rem;font-weight:800;transition:background var(--tr);}
+    .map-link:hover{background:#1A0800;}
+    .order-box{margin-top:20px;padding:20px;background:var(--white);border-radius:var(--r-md);box-shadow:var(--sh-sm);}
+    .order-box-title{font-family:var(--font-h);font-size:.95rem;color:var(--brown-dk);margin-bottom:13px;}
+    .o-step{display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;}
+    .o-step:last-child{margin-bottom:0;}
+    .o-num{width:22px;height:22px;background:linear-gradient(135deg,var(--red),var(--red2));color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:800;flex-shrink:0;margin-top:1px;}
+    .o-txt{font-size:.8rem;color:var(--text-med);line-height:1.5;font-weight:600;}
 
-    /* ===== FLOATING WA ===== */
-    .float-wa {
-      position: fixed; bottom: 28px; right: 28px;
-      z-index: 900;
-      width: 58px; height: 58px;
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 20px rgba(37,211,102,0.5);
-      transition: transform var(--trans);
-      animation: waPulse 2.8s ease infinite;
-    }
-    .float-wa:hover { transform: scale(1.12); }
-    .float-wa-tooltip {
-      position: absolute;
-      right: 68px; top: 50%;
-      transform: translateY(-50%);
-      background: var(--c-dark);
-      color: var(--c-white);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 6px 12px;
-      border-radius: 6px;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity var(--trans);
-      pointer-events: none;
-    }
-    .float-wa-tooltip::after {
-      content: '';
-      position: absolute;
-      left: 100%; top: 50%;
-      transform: translateY(-50%);
-      border: 5px solid transparent;
-      border-left-color: var(--c-dark);
-    }
-    .float-wa:hover .float-wa-tooltip { opacity: 1; }
+    /* FLOAT WA */
+    .float-wa{position:fixed;bottom:26px;right:26px;z-index:900;width:56px;height:56px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform var(--tr);animation:waPulse 2.8s ease infinite;}
+    .float-wa:hover{transform:scale(1.12);}
+    .wa-tip{position:absolute;right:66px;top:50%;transform:translateY(-50%);background:var(--brown-dk);color:var(--white);font-size:.7rem;font-weight:700;padding:6px 12px;border-radius:6px;white-space:nowrap;opacity:0;transition:opacity var(--tr);pointer-events:none;}
+    .wa-tip::after{content:'';position:absolute;left:100%;top:50%;transform:translateY(-50%);border:5px solid transparent;border-left-color:var(--brown-dk);}
+    .float-wa:hover .wa-tip{opacity:1;}
 
     /* ===== FOOTER ===== */
-    .footer { background: var(--c-dark); color: rgba(255,248,240,0.65); padding: 56px 0 28px; }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,248,240,0.08);
-    }
-    .footer-brand { }
-    .footer-brand-name {
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--c-cream);
-      margin-bottom: 4px;
-    }
-    .footer-brand-sub { font-size: 0.78rem; color: var(--c-gold); margin-bottom: 14px; font-style: italic; }
-    .footer-brand-desc { font-size: 0.83rem; line-height: 1.8; margin-bottom: 20px; }
-    .footer-social { display: flex; gap: 8px; }
-    .footer-social-btn {
-      width: 38px; height: 38px;
-      border-radius: 9px;
-      display: flex; align-items: center; justify-content: center;
-      transition: var(--trans);
-    }
-    .footer-social-btn:hover { transform: translateY(-3px); }
-    .footer-social-btn.ig { background: linear-gradient(135deg, #833AB4, #FD1D1D, #FCB045); }
-    .footer-social-btn.fb { background: #1877F2; }
-    .footer-col-title {
-      font-weight: 600;
-      color: var(--c-cream);
-      font-size: 0.88rem;
-      margin-bottom: 18px;
-      position: relative;
-      padding-bottom: 8px;
-    }
-    .footer-col-title::after {
-      content: ''; position: absolute;
-      bottom: 0; left: 0;
-      width: 28px; height: 2px;
-      background: var(--c-gold);
-      border-radius: 2px;
-    }
-    .footer-links { display: flex; flex-direction: column; gap: 9px; }
-    .footer-links a { font-size: 0.83rem; color: rgba(255,248,240,0.6); transition: var(--trans); }
-    .footer-links a:hover { color: var(--c-gold); padding-left: 5px; }
-    .footer-info { display: flex; flex-direction: column; gap: 12px; }
-    .footer-info-item { }
-    .footer-info-label { font-size: 0.7rem; color: rgba(255,248,240,0.4); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.07em; }
-    .footer-info-value { font-size: 0.82rem; line-height: 1.5; }
-    .footer-info-value a { color: var(--c-gold); }
-    .footer-bottom {
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 10px;
-    }
-    .footer-copy { font-size: 0.78rem; color: rgba(255,248,240,0.38); }
-    .footer-back {
-      font-size: 0.78rem;
-      color: rgba(255,248,240,0.38);
-      transition: color var(--trans);
-    }
-    .footer-back:hover { color: var(--c-gold); }
+    .footer{background:var(--brown-dk);color:rgba(255,248,240,.65);padding:56px 0 28px;}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:44px;padding-bottom:44px;border-bottom:1px solid rgba(255,248,240,.08);}
+    .f-brand-name{font-family:var(--font-h);font-size:1.4rem;color:var(--cream);margin-bottom:3px;}
+    .f-brand-sub{font-size:.76rem;color:var(--orange-lt);margin-bottom:13px;font-style:italic;font-weight:700;}
+    .f-desc{font-size:.82rem;line-height:1.8;margin-bottom:18px;}
+    .f-socials{display:flex;gap:8px;}
+    .f-soc{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:var(--tr);}
+    .f-soc:hover{transform:translateY(-3px);}
+    .f-col-title{font-weight:800;color:var(--cream);font-size:.86rem;margin-bottom:16px;position:relative;padding-bottom:7px;}
+    .f-col-title::after{content:'';position:absolute;bottom:0;left:0;width:26px;height:2px;background:var(--orange);border-radius:2px;}
+    .f-links{display:flex;flex-direction:column;gap:8px;}
+    .f-links a{font-size:.82rem;color:rgba(255,248,240,.58);transition:var(--tr);}
+    .f-links a:hover{color:var(--orange-lt);padding-left:5px;}
+    .f-info{display:flex;flex-direction:column;gap:11px;}
+    .f-info-lbl{font-size:.68rem;color:rgba(255,248,240,.38);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px;}
+    .f-info-val{font-size:.8rem;line-height:1.5;}
+    .f-info-val a{color:var(--gold2);}
+    .footer-bot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+    .f-copy{font-size:.76rem;color:rgba(255,248,240,.35);}
+    .f-back{font-size:.76rem;color:rgba(255,248,240,.35);transition:color var(--tr);}
+    .f-back:hover{color:var(--orange-lt);}
 
-    /* ===== KEYFRAMES ===== */
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-18px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes bounceY {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(-8px); }
-    }
-    @keyframes waPulse {
-      0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
-      50%       { box-shadow: 0 4px 30px rgba(37,211,102,0.85), 0 0 0 10px rgba(37,211,102,0.12); }
-    }
+    /* KEYFRAMES */
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-18px);}to{opacity:1;transform:none;}}
+    @keyframes bounceY{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-8px);}}
+    @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5);}50%{box-shadow:0 4px 30px rgba(37,211,102,.85),0 0 0 10px rgba(37,211,102,.12);}}
 
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 1100px) {
-      .menu-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 900px) {
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .about-img-wrap { max-width: 440px; margin: 0 auto; }
-      .about-text { padding-left: 0; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 768px) {
-      :root { --nav-h: 64px; }
-      .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
-      .testi-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
-      .gallery-item.tall { grid-row: span 1; }
-      .gallery-item.wide { grid-column: span 2; }
-      .stats-inner { gap: 0; }
-      .stat-item { padding: 10px 24px; }
-      .footer-top { grid-template-columns: 1fr; gap: 28px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-    }
-    @media (max-width: 520px) {
-      .menu-grid { grid-template-columns: 1fr; }
-      .about-features { grid-template-columns: 1fr; }
-      .gallery-grid { grid-template-columns: 1fr; }
-      .gallery-item.wide { grid-column: span 1; }
-      .hero-actions { flex-direction: column; align-items: stretch; }
-      .btn { justify-content: center; width: 100%; }
-      .float-wa { bottom: 20px; right: 20px; width: 52px; height: 52px; }
-      .stat-item:not(:last-child)::after { display: none; }
-    }
+    /* RESPONSIVE */
+    @media(max-width:1100px){.menu-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:40px;}.about-img-wrap{max-width:420px;margin:0 auto;}.about-text{padding-left:0;}.footer-top{grid-template-columns:1fr 1fr;}}
+    @media(max-width:768px){:root{--nav-h:64px;}.nav-links{display:none;}.nav-ham{display:flex;}.testi-grid{grid-template-columns:1fr;}.contact-grid{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:195px;}.g-item.tall{grid-row:span 1;}.g-item.wide{grid-column:span 2;}.stat{padding:9px 22px;}.footer-top{grid-template-columns:1fr;gap:26px;}.footer-bot{flex-direction:column;text-align:center;}}
+    @media(max-width:520px){.menu-grid{grid-template-columns:1fr;}.gallery-grid{grid-template-columns:1fr;}.g-item.wide{grid-column:span 1;}.hero-btns{flex-direction:column;align-items:stretch;}.btn{justify-content:center;width:100%;}.float-wa{bottom:18px;right:18px;width:50px;height:50px;}.stat:not(:last-child)::after{display:none;}}
   </style>
 </head>
 <body>
 
-  <!-- ===== NAVIGATION ===== -->
-  <nav class="nav" id="nav">
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#beranda" class="nav-logo">
-          <div class="nav-logo-icon">&#x1F9C1;</div>
-          <div class="nav-logo-text">
-            Beppa Barugae
-            <small>Kue Tradisional Bugis &bull; Makassar</small>
-          </div>
-        </a>
-        <ul class="nav-links">
-          <li><a href="#tentang">Tentang</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#galeri">Galeri</a></li>
-          <li><a href="#testimoni">Testimoni</a></li>
-          <li><a href="#kontak" class="nav-cta">Pesan Sekarang</a></li>
-        </ul>
-        <button class="nav-hamburger" id="hamburger" aria-label="Buka menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="nav-mobile" id="navMobile" aria-hidden="true">
-    <a href="#tentang">Tentang Kami</a>
-    <a href="#menu">Menu Kue</a>
-    <a href="#galeri">Galeri</a>
-    <a href="#testimoni">Testimoni</a>
-    <a href="#kontak" class="nav-cta btn">&#x1F6D2; Pesan Sekarang</a>
-  </div>
-
-  <!-- ===== HERO ===== -->
-  <section class="hero" id="beranda">
-    <div class="hero-decor hero-decor-1"></div>
-    <div class="hero-decor hero-decor-2"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">&#x1F370; Kedai Kue Bugis Makassar</div>
-      <h1 class="hero-title">
-        Beppa
-        <span class="hero-title-sub">Barugae</span>
-      </h1>
-      <p class="hero-tagline">
-        <strong>Kue Tradisional Bugis yang Naik Kelas</strong><br>
-        Autentik &bull; Segar Setiap Hari &bull; Dibuat Sepenuh Hati
-      </p>
-      <div class="hero-actions">
-        <a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="btn btn-primary" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Pesan via WhatsApp
-        </a>
-        <a href="#menu" class="btn btn-outline">
-          &#x1F370; Lihat Menu Lengkap
-        </a>
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <div class="hero-scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-
-  <!-- ===== STATS BAR ===== -->
-  <div class="stats-bar">
-    <div class="container">
-      <div class="stats-inner">
-        <div class="stat-item reveal">
-          <div class="stat-num">60+</div>
-          <div class="stat-label">Jenis Produk</div>
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#beranda" class="nav-logo">
+        <img src="assets/logo.png" alt="Beppa Barugae Logo">
+        <div class="nav-logo-text">
+          Beppa Barugae
+          <small>Kedai Kue Tradisional &amp; Kekinian</small>
         </div>
-        <div class="stat-item reveal">
-          <div class="stat-num">500+</div>
-          <div class="stat-label">Pelanggan Setia</div>
-        </div>
-        <div class="stat-item reveal">
-          <div class="stat-num">5&#x2605;</div>
-          <div class="stat-label">Rating Pelanggan</div>
-        </div>
-        <div class="stat-item reveal">
-          <div class="stat-num">06&#x2013;18</div>
-          <div class="stat-label">Buka Setiap Hari (WITA)</div>
-        </div>
-      </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+        <li><a href="#kontak" class="nav-cta">Pesan Sekarang</a></li>
+      </ul>
+      <button class="nav-ham" id="ham" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
+</nav>
+<div class="nav-mob" id="navMob">
+  <a href="#tentang">Tentang Kami</a>
+  <a href="#menu">Menu Kue</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#testimoni">Testimoni</a>
+  <a href="#kontak" class="nav-cta btn">&#x1F6D2; Pesan Sekarang</a>
+</div>
 
-  <!-- ===== ABOUT ===== -->
-  <section class="about" id="tentang">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-img-wrap reveal-left">
-          <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=750&fit=crop&q=80"
-            alt="Beppa Barugae — Kedai Kue Tradisional Bugis Makassar"
-            class="about-img-main"
-            loading="lazy"
-          >
-          <div class="about-img-badge">
-            <strong>60+</strong>
-            <span>Jenis<br>Kue</span>
-          </div>
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <div class="hero-ring hero-ring-1"></div>
+  <div class="hero-ring hero-ring-2"></div>
+  <div class="hero-content">
+    <img src="assets/logo.png" alt="Beppa Barugae" class="hero-logo">
+    <h1 class="hero-name">Beppa <span>Barugae</span></h1>
+    <div class="hero-tag">&#x2605; Kedai Kue Tradisional &amp; Kekinian &#x2605;</div>
+    <p class="hero-desc">
+      Kue autentik khas Bugis-Makassar &mdash; dibuat segar setiap hari<br>
+      dengan bahan pilihan dan cinta yang tulus
+    </p>
+    <div class="hero-btns">
+      <a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="btn btn-red" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Pesan via WhatsApp
+      </a>
+      <a href="#menu" class="btn btn-ghost">&#x1F370; Lihat Menu Lengkap</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="container">
+    <div class="stats-inner">
+      <div class="stat reveal"><div class="stat-n">100+</div><div class="stat-l">Jenis Produk</div></div>
+      <div class="stat reveal"><div class="stat-n">500+</div><div class="stat-l">Pelanggan Setia</div></div>
+      <div class="stat reveal"><div class="stat-n">5&#x2605;</div><div class="stat-l">Rating Pelanggan</div></div>
+      <div class="stat reveal"><div class="stat-n">06&ndash;18</div><div class="stat-l">Buka Setiap Hari</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="tentang">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal-l">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=750&fit=crop&q=80" alt="Beppa Barugae Kedai Kue" class="about-img" loading="lazy">
+        <div class="about-badge"><strong>100+</strong><span>Jenis<br>Kue</span></div>
+      </div>
+      <div class="about-text reveal-r">
+        <div class="sec-badge">Tentang Kami</div>
+        <h2 class="sec-title" style="text-align:left;">Kue Kampung yang Naik Kelas</h2>
+        <div class="divider" style="margin-left:0;"></div>
+        <p class="about-p"><strong>Beppa Barugae</strong> adalah kedai kue tradisional dan kekinian yang lahir dari kecintaan mendalam terhadap kuliner khas Bugis-Makassar. Berlokasi di Jl. Raya Baruga, Bukit Baruga Antang, kami hadir dengan visi sederhana namun kuat: <em>menjaga keaslian rasa kue kampung, sekaligus mengangkatnya ke level yang lebih premium.</em></p>
+        <p class="about-p">Dipimpin oleh <strong>Sabriani, S.KM.</strong> bersama tim 7 orang yang berdedikasi, Beppa Barugae memproduksi lebih dari 100 jenis kue basah, snack, dan sajian khas Bugis-Makassar &mdash; dibuat segar setiap hari, tanpa pengawet, dan penuh keberkahan.</p>
+        <div class="values">
+          <div class="value"><div class="value-icon">&#x1F4DC;</div><div><div class="value-title">Autentik</div><div class="value-desc">Menjaga keaslian resep dan cita rasa khas Bugis yang telah diwariskan turun-temurun</div></div></div>
+          <div class="value"><div class="value-icon">&#x1F33F;</div><div><div class="value-title">Segar</div><div class="value-desc">Diproduksi harian dengan bahan segar pilihan, mengutamakan kebersihan dan kualitas</div></div></div>
+          <div class="value"><div class="value-icon">&#x2764;&#xFE0F;</div><div><div class="value-title">Sepenuh Hati</div><div class="value-desc">Setiap pesanan dilayani dengan perhatian, keramahan, dan niat yang penuh keberkahan</div></div></div>
         </div>
-        <div class="about-text reveal-right">
-          <div class="section-badge">Tentang Kami</div>
-          <h2 class="section-title" style="text-align:left;">Kue Kampung yang Naik Kelas</h2>
-          <div class="divider" style="margin-left:0;"></div>
-          <p class="about-story">
-            <strong>Beppa Barugae</strong> adalah rumah produksi kue tradisional Bugis-Makassar yang berdiri di jantung Bukit Baruga, Antang. Kami hadir dengan visi yang sederhana namun kuat: <em>menjaga keaslian rasa kue kampung, sekaligus mengangkatnya ke level yang lebih premium dan modern.</em>
-          </p>
-          <p class="about-story">
-            Dipimpin oleh <strong>Sabriani, S.KM.</strong> bersama tim 7 orang yang berdedikasi, Beppa Barugae memproduksi lebih dari 60 jenis kue basah dan sajian sarapan khas Bugis-Makassar — dibuat segar setiap hari, tanpa pengawet, dan penuh keberkahan.
-          </p>
-          <div class="about-values">
-            <div class="about-value">
-              <div class="about-value-icon">&#x1F4DC;</div>
-              <div>
-                <div class="about-value-title">Autentik</div>
-                <div class="about-value-desc">Menjaga keaslian resep dan cita rasa khas Bugis yang telah diwariskan turun-temurun</div>
-              </div>
-            </div>
-            <div class="about-value">
-              <div class="about-value-icon">&#x1F33F;</div>
-              <div>
-                <div class="about-value-title">Segar</div>
-                <div class="about-value-desc">Diproduksi harian dengan bahan-bahan segar pilihan, mengutamakan kebersihan dan kualitas</div>
-              </div>
-            </div>
-            <div class="about-value">
-              <div class="about-value-icon">&#x2764;&#xFE0F;</div>
-              <div>
-                <div class="about-value-title">Sepenuh Hati</div>
-                <div class="about-value-desc">Setiap pesanan dilayani dengan perhatian, keramahan, dan niat yang penuh keberkahan</div>
-              </div>
-            </div>
-          </div>
-          <div class="about-features">
-            <div class="about-feature">Tersedia di GoFood</div>
-            <div class="about-feature">Pesan via WhatsApp</div>
-            <div class="about-feature">Hampers &amp; Snack Box</div>
-            <div class="about-feature">Pesanan Event &amp; Instansi</div>
-            <div class="about-feature">Pengiriman area Makassar</div>
-            <div class="about-feature">Open order setiap hari</div>
-          </div>
+        <div class="about-chips">
+          <span class="chip">&#x1F4F1; GoFood</span>
+          <span class="chip">&#x1F4E6; Hampers &amp; Snack Box</span>
+          <span class="chip">&#x1F686; Antar ke lokasi</span>
+          <span class="chip">&#x1F3E2; Pesanan Instansi</span>
+          <span class="chip">&#x1F382; Kue Ulang Tahun</span>
+          <span class="chip">&#x1F6D2; Open Order Setiap Hari</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== MENU ===== -->
-  <section class="menu" id="menu">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">Menu Andalan</div>
-        <h2 class="section-title">Pilihan Kue Istimewa Kami</h2>
-        <div class="divider"></div>
-        <p class="section-subtitle">Dari kue tradisional Bugis yang autentik hingga kreasi kekinian — lebih dari 60 pilihan tersedia untuk memuaskan selera Anda.</p>
+<!-- MENU -->
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-badge">Menu Andalan</div>
+      <h2 class="sec-title">Pilihan Kue Istimewa Kami</h2>
+      <div class="divider"></div>
+      <p class="sec-sub">Dari kue tradisional Bugis yang autentik hingga kreasi kekinian &mdash; lebih dari 100 jenis produk tersedia setiap harinya.</p>
+    </div>
+    <div class="menu-grid">
+
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&h=300&fit=crop&q=80" alt="Lemper Ayam Bakar" class="card-img" loading="lazy">
+          <span class="card-tag tag-hot">Bestseller</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Lemper Ayam Bakar</div>
+          <div class="card-desc">Lemper ketan isi ayam suwir berbumbu, dibakar hingga harum kecokelatan. Gurih, legit, dan mengenyangkan.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 6.000 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Lemper%20Ayam%20Bakar" class="card-btn" target="_blank" rel="noopener">Pesan</a>
+          </div>
+        </div>
       </div>
-      <div class="menu-grid">
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&h=300&fit=crop&q=80" alt="Bolu Pandan Kukus" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag trad">Bestseller</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Bolu Pandan Kukus</div>
-            <div class="menu-card-desc">Bolu kukus lembut dengan aroma pandan segar alami, tekstur ringan mengembang sempurna — favorit keluarga setiap hari.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 45.000</div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Bolu%20Pandan%20Kukus" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1559181567-c3190befa4d3?w=400&h=300&fit=crop&q=80" alt="Jalangkote" class="card-img" loading="lazy">
+          <span class="card-tag tag-trad">Khas Makassar</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Jalangkote</div>
+          <div class="card-desc">Pastel khas Makassar isi sayur dan bihun berbumbu, digoreng renyah. Nikmat dengan sambal cuka pedas.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 5.500 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Jalangkote" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop&q=80" alt="Brownies Cokelat Premium" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag new">Kekinian</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Brownies Cokelat Premium</div>
-            <div class="menu-card-desc">Brownies fudgy dengan cokelat pilihan, lapisan ganache tebal, dan tekstur moist yang memanjakan setiap gigitan.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 65.000</div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Brownies%20Cokelat%20Premium" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop&q=80" alt="Barongko" class="card-img" loading="lazy">
+          <span class="card-tag tag-trad">Khas Bugis</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Barongko</div>
+          <div class="card-desc">Kue tradisional Bugis dari pisang raja berbumbu santan kukus dalam daun pisang. Lembut, manis, dan harum alami.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 5.000 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Barongko" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=400&h=300&fit=crop&q=80" alt="Putu Ayu Kelapa" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag trad">Tradisional</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Putu Ayu Kelapa</div>
-            <div class="menu-card-desc">Kue tradisional pandan bertabur kelapa parut segar, manis legit dengan aroma khas yang membawa kenangan masa kecil.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 35.000 <small>/ 6 pcs</small></div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Putu%20Ayu%20Kelapa" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=400&h=300&fit=crop&q=80" alt="Bolu Kukus Pelangi" class="card-img" loading="lazy">
+          <span class="card-tag tag-trad">Tradisional</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Bolu Kukus Pelangi</div>
+          <div class="card-desc">Bolu kukus lembut berlapis warna-warni cerah, ringan mengembang dengan aroma vanilla yang memikat.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 3.500 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Bolu%20Kukus%20Pelangi" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop&q=80" alt="Kue Lapis Pelangi" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag trad">Tradisional</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Kue Lapis Pelangi</div>
-            <div class="menu-card-desc">Kue lapis berlapis warna-warni, tekstur kenyal dari tepung beras dengan cita rasa santan kelapa yang gurih manis.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 55.000</div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Kue%20Lapis%20Pelangi" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=400&h=300&fit=crop&q=80" alt="Onde Wijen" class="card-img" loading="lazy">
+          <span class="card-tag tag-trad">Tradisional</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Onde Wijen</div>
+          <div class="card-desc">Bola ketan berbalut wijen renyah dengan isian kacang hijau manis lembut &mdash; renyah di luar, legit di dalam.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 4.000 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Onde%20Wijen" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1559181567-c3190befa4d3?w=400&h=300&fit=crop&q=80" alt="Dadar Gulung Pandan" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag trad">Tradisional</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Dadar Gulung Pandan</div>
-            <div class="menu-card-desc">Crepe tipis hijau pandan berisi kelapa parut dan gula merah cair yang legit — sajian sarapan autentik khas Bugis-Makassar.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 30.000 <small>/ 5 pcs</small></div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Dadar%20Gulung%20Pandan" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop&q=80" alt="Brownies Spatula Biru" class="card-img" loading="lazy">
+          <span class="card-tag tag-new">Kekinian</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Brownies Spatula Biru</div>
+          <div class="card-desc">Brownies premium fudgy dengan cokelat pilihan, tekstur moist yang memanjakan lidah &mdash; favorit pelanggan setia.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 35.000 <small>/ loyang</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Brownies%20Spatula%20Biru" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=300&fit=crop&q=80" alt="Brownies Keju Leleh" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag new">Favorit</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Brownies Keju Leleh</div>
-            <div class="menu-card-desc">Brownies premium dengan topping keju cheddar leleh gurih yang memadu sempurna dengan manisnya cokelat. Kombinasi yang viral!</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 75.000</div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Brownies%20Keju%20Leleh" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop&q=80" alt="Risol Mayo" class="card-img" loading="lazy">
+          <span class="card-tag tag-new">Kekinian</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Risol Mayo</div>
+          <div class="card-desc">Risoles renyah berisi mayones, telur, dan sayuran segar. Gurih creamy, cocok untuk sarapan dan camilan sore.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 5.000 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Risol%20Mayo" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?w=400&h=300&fit=crop&q=80" alt="Onde-onde Wijen" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag trad">Tradisional</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Onde-onde Wijen</div>
-            <div class="menu-card-desc">Bola ketan berbalut wijen renyah dengan isian kacang hijau manis lembut — renyah di luar, legit di dalam.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Rp 25.000 <small>/ 6 pcs</small></div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Onde-onde%20Wijen" class="menu-card-btn" target="_blank" rel="noopener">Pesan</a>
-            </div>
+      <div class="card reveal">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=400&h=300&fit=crop&q=80" alt="Dadar Gulung" class="card-img" loading="lazy">
+          <span class="card-tag tag-trad">Tradisional</span>
+        </div>
+        <div class="card-body">
+          <div class="card-name">Dadar Gulung</div>
+          <div class="card-desc">Crepe tipis pandan hijau berisi kelapa parut dan gula merah cair yang legit &mdash; sarapan autentik khas Bugis-Makassar.</div>
+          <div class="card-foot">
+            <div class="card-price">Rp 3.500 <small>/ pcs</small></div>
+            <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20pesan%20Dadar%20Gulung" class="card-btn" target="_blank" rel="noopener">Pesan</a>
           </div>
         </div>
+      </div>
 
-        <div class="menu-card reveal">
-          <div class="menu-card-img-wrap">
-            <img src="https://images.unsplash.com/photo-1517427294546-5aa121f68e8a?w=400&h=300&fit=crop&q=80" alt="Hampers Spesial" class="menu-card-img" loading="lazy">
-            <span class="menu-card-tag new">Special</span>
-          </div>
-          <div class="menu-card-body">
-            <div class="menu-card-name">Hampers &amp; Snack Box</div>
-            <div class="menu-card-desc">Paket hampers dan snack box eksklusif untuk acara, hari raya, ulang tahun, dan korporat — dikemas cantik, berkesan.</div>
-            <div class="menu-card-footer">
-              <div class="menu-card-price">Mulai Rp 80.000</div>
-              <a href="https://wa.me/6289672838584?text=Halo%2C%20saya%20mau%20tanya%20tentang%20Hampers%20dan%20Snack%20Box" class="menu-card-btn" target="_blank" rel="noopener">Info</a>
-            </div>
-          </div>
+    </div>
+    <div class="menu-more reveal">
+      <span class="menu-more-note">&#x1F370; Masih ada 90+ jenis kue lainnya &mdash; tanyakan via WhatsApp!</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="galeri">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-badge">Galeri Foto</div>
+      <h2 class="sec-title">Tampilan yang Menggugah Selera</h2>
+      <div class="divider"></div>
+      <p class="sec-sub">Setiap kue Beppa Barugae dibuat dengan cermat &mdash; indah dipandang, lebih lezat di rasa.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item tall reveal"><img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=800&fit=crop&q=80" alt="Kue tradisional" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item reveal"><img src="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&h=360&fit=crop&q=80" alt="Kue Bugis" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item reveal"><img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=360&fit=crop&q=80" alt="Brownies" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item wide reveal"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=360&fit=crop&q=80" alt="Aneka kue" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item reveal"><img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=360&fit=crop&q=80" alt="Kue pandan" loading="lazy"><div class="g-overlay"></div></div>
+      <div class="g-item reveal"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&h=360&fit=crop&q=80" alt="Bolu kukus" loading="lazy"><div class="g-overlay"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi" id="testimoni">
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="reveal">
+      <div class="sec-badge" style="background:rgba(232,168,76,.18);border-color:rgba(232,168,76,.28);color:var(--gold2);">Testimoni</div>
+      <h2 class="sec-title">Apa Kata Pelanggan Kami</h2>
+      <div class="divider"></div>
+      <p class="sec-sub">Kepuasan pelanggan adalah kebanggaan kami yang sesungguhnya.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="t-card reveal">
+        <div class="t-q">&ldquo;</div>
+        <div class="t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+        <p class="t-text">Jalangkotenya enak banget, persis cita rasa yang saya cari! Sudah jadi pelanggan tetap, sering beli buat sarapan keluarga setiap pagi. Recommended banget!</p>
+        <div class="t-author">
+          <img src="https://images.unsplash.com/photo-1494790108755-2616b9e99b24?w=88&h=88&fit=crop&q=80" alt="Rina Sari" class="t-ava" loading="lazy">
+          <div><div class="t-name">Rina Sari</div><div class="t-role">Pelanggan Setia &bull; Makassar</div></div>
         </div>
-
+      </div>
+      <div class="t-card reveal">
+        <div class="t-q">&ldquo;</div>
+        <div class="t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+        <p class="t-text">Barongkonya autentik banget, persis seperti buatan almarhum nenek dulu. Lempernya juga juara! Sering beli buat oleh-oleh tamu dari luar kota.</p>
+        <div class="t-author">
+          <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=88&h=88&fit=crop&q=80" alt="Ahmad Fauzi" class="t-ava" loading="lazy">
+          <div><div class="t-name">Ahmad Fauzi</div><div class="t-role">Pelanggan &bull; Antang, Makassar</div></div>
+        </div>
+      </div>
+      <div class="t-card reveal">
+        <div class="t-q">&ldquo;</div>
+        <div class="t-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
+        <p class="t-text">Pesan snack box untuk acara kantor, semua tamu suka! Variasinya banyak, kemasannya rapi dan cantik. Respon WhatsApp cepat. Pasti pesan lagi!</p>
+        <div class="t-author">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=88&h=88&fit=crop&q=80" alt="Dewi Kartika" class="t-ava" loading="lazy">
+          <div><div class="t-name">Dewi Kartika</div><div class="t-role">Pelanggan &bull; Makassar</div></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== GALLERY ===== -->
-  <section class="gallery" id="galeri">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">Galeri Foto</div>
-        <h2 class="section-title">Tampilan yang Menggugah Selera</h2>
-        <div class="divider"></div>
-        <p class="section-subtitle">Setiap kue Beppa Barugae dibuat dengan cermat — indah dipandang, lebih lezat di rasa.</p>
-      </div>
-      <div class="gallery-grid">
-        <div class="gallery-item tall reveal">
-          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=800&fit=crop&q=80" alt="Kue tradisional Bugis" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=600&h=360&fit=crop&q=80" alt="Bolu pandan" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&h=360&fit=crop&q=80" alt="Brownies cokelat" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-        <div class="gallery-item wide reveal">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=360&fit=crop&q=80" alt="Aneka kue Beppa Barugae" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&h=360&fit=crop&q=80" alt="Putu ayu" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-        <div class="gallery-item reveal">
-          <img src="https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?w=600&h=360&fit=crop&q=80" alt="Brownies keju" loading="lazy">
-          <div class="gallery-overlay"></div>
-        </div>
-      </div>
+<!-- CONTACT -->
+<section class="contact" id="kontak">
+  <div class="container">
+    <div class="reveal">
+      <div class="sec-badge">Hubungi Kami</div>
+      <h2 class="sec-title">Pesan &amp; Kunjungi Kami</h2>
+      <div class="divider"></div>
+      <p class="sec-sub">Siap melayani setiap hari. Hubungi via WhatsApp untuk pemesanan cepat dan mudah.</p>
     </div>
-  </section>
-
-  <!-- ===== TESTIMONIALS ===== -->
-  <section class="testimonials" id="testimoni">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge" style="background:rgba(201,168,76,0.18);border-color:rgba(201,168,76,0.3);color:var(--c-gold2);">Testimoni</div>
-        <h2 class="section-title">Apa Kata Pelanggan Kami</h2>
-        <div class="divider"></div>
-        <p class="section-subtitle">Kepuasan pelanggan adalah kebanggaan kami yang sesungguhnya.</p>
-      </div>
-      <div class="testi-grid">
-
-        <div class="testi-card reveal">
-          <div class="testi-quote-icon">&ldquo;</div>
-          <div class="testi-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-          <p class="testi-text">Brownies kejunya nagih banget! Pertama cobain langsung pesan lagi buat keluarga. Kemasannya cantik, cocok banget buat hampers lebaran. Pokoknya recommended!</p>
-          <div class="testi-author">
-            <img src="https://images.unsplash.com/photo-1494790108755-2616b9e99b24?w=88&h=88&fit=crop&q=80" alt="Rina Sari" class="testi-avatar" loading="lazy">
-            <div>
-              <div class="testi-name">Rina Sari</div>
-              <div class="testi-role">Pelanggan Setia &bull; Makassar</div>
-            </div>
-          </div>
+    <div class="contact-grid">
+      <div class="reveal-l">
+        <h3 class="c-title">Informasi Kedai</h3>
+        <div class="c-items">
+          <div class="c-item"><div class="c-icon ci-loc">&#x1F4CD;</div><div><div class="c-lbl">Alamat</div><div class="c-val">Jl. Raya Baruga No. 43, Bukit Baruga Antang, Makassar</div></div></div>
+          <div class="c-item"><div class="c-icon ci-time">&#x23F0;</div><div><div class="c-lbl">Jam Buka</div><div class="c-val">Setiap Hari &bull; 06.00 &ndash; 18.00 WITA</div></div></div>
+          <div class="c-item"><div class="c-icon ci-wa">&#x1F4F1;</div><div><div class="c-lbl">WhatsApp / Telepon</div><div class="c-val"><a href="tel:081354668466">0813-5466-8466</a></div></div></div>
+          <div class="c-item"><div class="c-icon ci-food">&#x1F6CD;&#xFE0F;</div><div><div class="c-lbl">Tersedia di</div><div class="c-val">GoFood &bull; WhatsApp &bull; Langsung di Kedai</div></div></div>
         </div>
-
-        <div class="testi-card reveal">
-          <div class="testi-quote-icon">&ldquo;</div>
-          <div class="testi-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-          <p class="testi-text">Putu Ayunya autentik banget, persis seperti kue nenek zaman dulu. Bolu pandannya lembut dan wangi. Sering beli buat oleh-oleh kalau ada tamu dari luar kota.</p>
-          <div class="testi-author">
-            <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=88&h=88&fit=crop&q=80" alt="Ahmad Fauzi" class="testi-avatar" loading="lazy">
-            <div>
-              <div class="testi-name">Ahmad Fauzi</div>
-              <div class="testi-role">Pelanggan &bull; Antang, Makassar</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testi-card reveal">
-          <div class="testi-quote-icon">&ldquo;</div>
-          <div class="testi-stars">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</div>
-          <p class="testi-text">Pesan snack box untuk acara arisan, semua tamu suka! Kue lapisnya cantik dan enak. Pelayanannya ramah, respon cepat via WhatsApp. Harga pun sangat terjangkau.</p>
-          <div class="testi-author">
-            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=88&h=88&fit=crop&q=80" alt="Dewi Kartika" class="testi-avatar" loading="lazy">
-            <div>
-              <div class="testi-name">Dewi Kartika</div>
-              <div class="testi-role">Pelanggan &bull; Perumnas, Makassar</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section class="contact" id="kontak">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-badge">Hubungi Kami</div>
-        <h2 class="section-title">Pesan &amp; Kunjungi Kami</h2>
-        <div class="divider"></div>
-        <p class="section-subtitle">Siap melayani pesanan Anda setiap hari. Hubungi kami via WhatsApp untuk pemesanan yang cepat dan mudah.</p>
-      </div>
-      <div class="contact-grid">
-        <div class="reveal-left">
-          <h3 class="contact-info-title">Informasi Kedai</h3>
-          <div class="contact-items">
-            <div class="contact-item">
-              <div class="contact-icon ic-loc">&#x1F4CD;</div>
-              <div>
-                <div class="contact-label">Alamat</div>
-                <div class="contact-value">Jl. Raya Baruga No. 43, Bukit Baruga Antang, Makassar</div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon ic-time">&#x23F0;</div>
-              <div>
-                <div class="contact-label">Jam Buka</div>
-                <div class="contact-value">Setiap Hari &bull; 06.00 &ndash; 18.00 WITA</div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon ic-wa">&#x1F4F1;</div>
-              <div>
-                <div class="contact-label">WhatsApp / Telepon</div>
-                <div class="contact-value"><a href="tel:081354668466">0813-5466-8466</a></div>
-              </div>
-            </div>
-            <div class="contact-item">
-              <div class="contact-icon ic-food">&#x1F6D2;</div>
-              <div>
-                <div class="contact-label">Juga Tersedia di</div>
-                <div class="contact-value">GoFood &bull; Pesanan Online &bull; Marketplace</div>
-              </div>
-            </div>
-          </div>
-
-          <a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="btn-wa" target="_blank" rel="noopener">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Chat WhatsApp Sekarang
+        <a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="btn-wa" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Chat WhatsApp Sekarang
+        </a>
+        <div class="socials">
+          <span class="soc-lbl">Ikuti kami:</span>
+          <a href="https://www.instagram.com/beppa.barugae?igsh=ZGtpdzdxb200NW9o" class="soc-btn soc-ig" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
-
-          <div class="social-wrap">
-            <span class="social-label">Ikuti kami:</span>
-            <a href="https://www.instagram.com/beppa.barugae?igsh=ZGtpdzdxb200NW9o" class="social-btn ig" target="_blank" rel="noopener" aria-label="Instagram Beppa Barugae">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="https://www.facebook.com/share/1GuK9k3p2R/" class="social-btn fb" target="_blank" rel="noopener" aria-label="Facebook Beppa Barugae">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-          </div>
+          <a href="https://www.facebook.com/share/1GuK9k3p2R/" class="soc-btn soc-fb" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
         </div>
-
-        <div class="reveal-right">
-          <div class="contact-map-wrap">
-            <iframe
-              src="https://maps.google.com/maps?q=Jl.+Raya+Baruga+No.+43,+Bukit+Baruga+Antang,+Makassar&output=embed&z=16"
-              width="100%" height="360"
-              style="border:0;display:block;"
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-              title="Lokasi Beppa Barugae di Bukit Baruga Antang Makassar"
-            ></iframe>
-            <a href="https://maps.app.goo.gl/RTyjt3kRJe2MHzoUA" target="_blank" rel="noopener" class="map-link">
-              &#x1F4CD; Buka di Google Maps
-            </a>
-          </div>
-          <div class="order-steps">
-            <div class="order-steps-title">&#x1F4CB; Cara Pesan</div>
-            <div class="order-step">
-              <div class="order-step-num">1</div>
-              <div class="order-step-text">Hubungi kami via WhatsApp di <strong>0813-5466-8466</strong></div>
-            </div>
-            <div class="order-step">
-              <div class="order-step-num">2</div>
-              <div class="order-step-text">Sebutkan jenis kue, jumlah, dan tanggal pengambilan/pengiriman</div>
-            </div>
-            <div class="order-step">
-              <div class="order-step-num">3</div>
-              <div class="order-step-text">Konfirmasi pesanan dan lakukan pembayaran DP</div>
-            </div>
-            <div class="order-step">
-              <div class="order-step-num">4</div>
-              <div class="order-step-text">Ambil langsung di kedai atau kami antar ke lokasi Anda &#x1F69A;</div>
-            </div>
-          </div>
+      </div>
+      <div class="reveal-r">
+        <div class="map-wrap">
+          <iframe src="https://maps.google.com/maps?q=Jl.+Raya+Baruga+No.+43,+Bukit+Baruga+Antang,+Makassar&output=embed&z=16" width="100%" height="350" style="border:0;display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Beppa Barugae"></iframe>
+          <a href="https://maps.app.goo.gl/RTyjt3kRJe2MHzoUA" target="_blank" rel="noopener" class="map-link">&#x1F4CD; Buka di Google Maps</a>
+        </div>
+        <div class="order-box">
+          <div class="order-box-title">&#x1F4CB; Cara Pesan</div>
+          <div class="o-step"><div class="o-num">1</div><div class="o-txt">Chat WhatsApp ke <strong>0813-5466-8466</strong></div></div>
+          <div class="o-step"><div class="o-num">2</div><div class="o-txt">Sebutkan jenis kue, jumlah, dan tanggal pengambilan</div></div>
+          <div class="o-step"><div class="o-num">3</div><div class="o-txt">Konfirmasi pesanan dan bayar DP</div></div>
+          <div class="o-step"><div class="o-num">4</div><div class="o-txt">Ambil di kedai atau kami antar ke lokasi Anda &#x1F69A;</div></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===== FOOTER ===== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-brand-name">&#x1F9C1; Beppa Barugae</div>
-          <div class="footer-brand-sub">Kue Tradisional Bugis yang Naik Kelas</div>
-          <p class="footer-brand-desc">Menghadirkan cita rasa kue tradisional Bugis-Makassar yang autentik, segar setiap hari, dan dibuat sepenuh hati oleh <strong style="color:var(--c-cream);">Sabriani, S.KM.</strong> bersama tim yang berdedikasi.</p>
-          <div class="footer-social">
-            <a href="https://www.instagram.com/beppa.barugae?igsh=ZGtpdzdxb200NW9o" class="footer-social-btn ig" target="_blank" rel="noopener" aria-label="Instagram">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-            <a href="https://www.facebook.com/share/1GuK9k3p2R/" class="footer-social-btn fb" target="_blank" rel="noopener" aria-label="Facebook">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="footer-col-title">Navigasi</div>
-          <ul class="footer-links">
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#tentang">Tentang Kami</a></li>
-            <li><a href="#menu">Menu Kue</a></li>
-            <li><a href="#galeri">Galeri Foto</a></li>
-            <li><a href="#testimoni">Testimoni</a></li>
-            <li><a href="#kontak">Kontak &amp; Pesan</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Info Kedai</div>
-          <div class="footer-info">
-            <div class="footer-info-item">
-              <div class="footer-info-label">Alamat</div>
-              <div class="footer-info-value">Jl. Raya Baruga No. 43, Bukit Baruga Antang, Makassar</div>
-            </div>
-            <div class="footer-info-item">
-              <div class="footer-info-label">Jam Buka</div>
-              <div class="footer-info-value">Setiap Hari, 06.00 &ndash; 18.00 WITA</div>
-            </div>
-            <div class="footer-info-item">
-              <div class="footer-info-label">WhatsApp</div>
-              <div class="footer-info-value"><a href="https://wa.me/6289672838584">0813-5466-8466</a></div>
-            </div>
-            <div class="footer-info-item">
-              <div class="footer-info-label">Owner</div>
-              <div class="footer-info-value">Sabriani, S.KM.</div>
-            </div>
-          </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="f-brand-name">Beppa Barugae</div>
+        <div class="f-brand-sub">Kedai Kue Tradisional &amp; Kekinian Makassar</div>
+        <p class="f-desc">Menghadirkan cita rasa kue Bugis-Makassar yang autentik, segar setiap hari, dibuat sepenuh hati oleh <strong style="color:var(--cream);">Sabriani, S.KM.</strong> bersama tim.</p>
+        <div class="f-socials">
+          <a href="https://www.instagram.com/beppa.barugae?igsh=ZGtpdzdxb200NW9o" class="f-soc soc-ig" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+          <a href="https://www.facebook.com/share/1GuK9k3p2R/" class="f-soc soc-fb" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">&copy; 2025 Beppa Barugae. Semua hak dilindungi.</div>
-        <a href="#beranda" class="footer-back">Kembali ke Atas &uarr;</a>
+      <div>
+        <div class="f-col-title">Navigasi</div>
+        <ul class="f-links">
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#menu">Menu Kue</a></li>
+          <li><a href="#galeri">Galeri Foto</a></li>
+          <li><a href="#testimoni">Testimoni</a></li>
+          <li><a href="#kontak">Kontak &amp; Pesan</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="f-col-title">Info Kedai</div>
+        <div class="f-info">
+          <div><div class="f-info-lbl">Alamat</div><div class="f-info-val">Jl. Raya Baruga No. 43, Bukit Baruga Antang, Makassar</div></div>
+          <div><div class="f-info-lbl">Jam Buka</div><div class="f-info-val">Setiap Hari, 06.00 &ndash; 18.00 WITA</div></div>
+          <div><div class="f-info-lbl">WhatsApp</div><div class="f-info-val"><a href="https://wa.me/6289672838584">0813-5466-8466</a></div></div>
+          <div><div class="f-info-lbl">Owner</div><div class="f-info-val">Sabriani, S.KM.</div></div>
+        </div>
       </div>
     </div>
-  </footer>
+    <div class="footer-bot">
+      <div class="f-copy">&copy; 2025 Beppa Barugae. Semua hak dilindungi.</div>
+      <a href="#beranda" class="f-back">Kembali ke Atas &uarr;</a>
+    </div>
+  </div>
+</footer>
 
-  <!-- Floating WhatsApp Button -->
-  <a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="float-wa" target="_blank" rel="noopener" aria-label="Chat WhatsApp Beppa Barugae">
-    <div class="float-wa-tooltip">Chat WhatsApp</div>
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
+<!-- FLOAT WA -->
+<a href="https://wa.me/6289672838584?text=Halo%20Beppa%20Barugae%2C%20saya%20mau%20pesan%20kue" class="float-wa" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+  <div class="wa-tip">Chat WhatsApp</div>
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
 
-  <script>
-    // ===== NAV SCROLL STATE =====
-    const nav = document.getElementById('nav');
-    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), {passive:true});
 
-    // ===== MOBILE MENU =====
-    const hamburger = document.getElementById('hamburger');
-    const navMobile = document.getElementById('navMobile');
-    hamburger.addEventListener('click', () => {
-      const isOpen = navMobile.classList.toggle('open');
-      hamburger.classList.toggle('active', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
-      navMobile.setAttribute('aria-hidden', !isOpen);
+  const ham = document.getElementById('ham');
+  const mob = document.getElementById('navMob');
+  ham.addEventListener('click', () => {
+    const o = mob.classList.toggle('on');
+    ham.classList.toggle('on', o);
+    ham.setAttribute('aria-expanded', o);
+  });
+  mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mob.classList.remove('on'); ham.classList.remove('on'); ham.setAttribute('aria-expanded','false');
+  }));
+
+  const els = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e,i) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('on'), i*70); obs.unobserve(e.target); } });
+  }, {threshold:.1,rootMargin:'0px 0px -50px 0px'});
+  els.forEach(el => obs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); const h = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'))||72; window.scrollTo({top: t.getBoundingClientRect().top+window.scrollY-h, behavior:'smooth'}); }
     });
-    navMobile.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMobile.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        navMobile.setAttribute('aria-hidden', 'true');
-      });
-    });
-
-    // ===== SCROLL ANIMATIONS =====
-    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    const revealObs = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 70);
-          revealObs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    revealEls.forEach(el => revealObs.observe(el));
-
-    // ===== SMOOTH SCROLL =====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', e => {
-        const id = anchor.getAttribute('href');
-        const target = document.querySelector(id);
-        if (target) {
-          e.preventDefault();
-          const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-          window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - navH, behavior: 'smooth' });
-        }
-      });
-    });
-
-    // ===== ACTIVE NAV HIGHLIGHT =====
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-    const secObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = '#' + entry.target.id;
-          navLinks.forEach(a => {
-            a.style.color = a.getAttribute('href') === id ? 'var(--c-gold)' : '';
-          });
-        }
-      });
-    }, { threshold: 0.45 });
-    sections.forEach(s => secObs.observe(s));
-  </script>
-
+  });
+</script>
 </body>
 </html>
